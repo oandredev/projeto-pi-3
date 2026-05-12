@@ -1,0 +1,39 @@
+<header>
+  <a class="logo-area" routerLink="/">
+    <img src="/images/logo.png" alt="Logo A&F Games" />
+    <h1>A&F Games</h1>
+  </a>
+
+  <nav class="menu">
+    <a routerLink="/offers">OFERTAS</a>
+    <a routerLink="/history">HISTÓRICO</a>
+    <a routerLink="/about-us">SOBRE NÓS</a>
+    <a id="cartH" routerLink="/cart">
+      <img src="/icons/cart.png" alt="Carrinho" />
+      <span class="cart-count">{{ cartCounter }}</span>
+    </a>
+  </nav>
+
+  <div class="account-container">
+    <button id="createAccount" routerLink="/signin">CRIAR CONTA</button>
+    <button id="joinInAccount" routerLink="/login">ENTRAR</button>
+  </div>
+
+  <div class="user-menu-container" style="display: none">
+    <button id="usernameH">
+      <span class="username username-btn">Nome do Usuário</span>
+      <span class="arrow-down">▼</span>
+    </button>
+
+    <div id="userDropdown" class="user-menu-dropdown">
+      <div class="user-info">
+        <div class="username username-dd">NAME</div>
+        <div class="email email-dd">name@gmail.com</div>
+      </div>
+
+      <hr class="separator" />
+
+      <button class="menu-item logout-button" (click)="logout()">Sair</button>
+    </div>
+  </div>
+</header>

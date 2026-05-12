@@ -1,0 +1,123 @@
+<section id="signin">
+  <div id="sectionTitle">
+    <h1>Cadastre-se</h1>
+    <hr />
+  </div>
+
+  <p>Crie sua conta agora mesmo. Rápido e prático</p>
+
+  <form #form="ngForm" id="formSignin" (ngSubmit)="TryRegisterUser()">
+    <!-- NOME -->
+    <label for="name">Nome Completo <span style="color: red">*</span></label>
+    <small id="errorName" class="inputError"></small>
+
+    <input
+      type="text"
+      name="name"
+      id="name"
+      maxlength="50"
+      required
+      [(ngModel)]="nameField"
+      (blur)="UpdateFirstInput('name')"
+      (input)="NameIsValid(nameField); checkForm()"
+    />
+
+    <!-- CPF -->
+    <label for="cpf">CPF <span style="color: red">*</span></label>
+    <small id="errorCPF" class="inputError"></small>
+
+    <input
+      type="text"
+      name="cpf"
+      id="cpf"
+      maxlength="14"
+      required
+      [(ngModel)]="cpfField"
+      (blur)="UpdateFirstInput('cpf')"
+      (input)="$event.target.value = formatCPF(cpfField); CPFIsValid(cpfField); checkForm()"
+    />
+
+    <!-- EMAIL -->
+    <label for="email">E-mail <span style="color: red">*</span></label>
+    <small id="errorEmail" class="inputError"></small>
+
+    <input
+      type="email"
+      name="email"
+      id="email"
+      maxlength="50"
+      required
+      [(ngModel)]="emailField"
+      (blur)="UpdateFirstInput('email')"
+      (input)="EmailIsValid(emailField); checkForm()"
+    />
+
+    <!-- SENHA -->
+    <label for="password">Senha <span style="color: red">*</span></label>
+    <small id="errorPassword" class="inputError"></small>
+
+    <div class="togglePasswordContainer" id="togglePasswordContainer1">
+      <input
+        type="password"
+        name="password"
+        id="password"
+        maxlength="50"
+        required
+        [(ngModel)]="passwordField"
+        (blur)="UpdateFirstInput('password')"
+        (input)="PasswordIsValid(passwordField); PasswordsAreValid(); checkForm()"
+      />
+
+      <button
+        type="button"
+        class="togglePasswordVisibility"
+        (click)="TogglePasswordVisibility('1')"
+        (mouseleave)="TogglePasswordVisibility('1', true)"
+      >
+        <img src="../icons/icon_show.png" id="show-icon-1" class="show-icon" />
+        <img
+          src="../icons/icon_hide.png"
+          id="hide-icon-1"
+          class="hide-icon"
+          style="display: none"
+        />
+      </button>
+    </div>
+
+    <!-- CONFIRMAR SENHA -->
+    <label for="passwordConfirmation">Confirmação da Senha <span style="color: red">*</span></label>
+    <small id="errorPasswordC" class="inputError"></small>
+
+    <div class="togglePasswordContainer" id="togglePasswordContainer2">
+      <input
+        type="password"
+        name="passwordConfirmation"
+        id="passwordConfirmation"
+        maxlength="50"
+        required
+        [(ngModel)]="passwordConfirmationField"
+        (blur)="UpdateFirstInput('passwordC')"
+        (input)="PasswordsAreValid(); checkForm()"
+      />
+
+      <button
+        type="button"
+        class="togglePasswordVisibility"
+        (click)="TogglePasswordVisibility('2')"
+        (mouseleave)="TogglePasswordVisibility('2', true)"
+      >
+        <img src="../icons/icon_show.png" id="show-icon-2" class="show-icon" />
+        <img
+          src="../icons/icon_hide.png"
+          id="hide-icon-2"
+          class="hide-icon"
+          style="display: none"
+        />
+      </button>
+    </div>
+
+    <button id="buttonSubmit" type="submit" disabled>ENTRAR</button>
+  </form>
+
+  <p id="loginRedirect">Já tem uma conta? <a routerLink="/login">Conectar</a></p>
+</section>

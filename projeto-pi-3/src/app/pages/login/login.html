@@ -1,0 +1,69 @@
+<section id="login">
+  <div id="loginTitle">
+    <h1>Login</h1>
+    <hr />
+  </div>
+
+  <p>Entre com sua conta para começar</p>
+
+  <form id="formsLogin" (ngSubmit)="ValidateLogin()" #loginForm="ngForm">
+    <small
+      id="errorLoginOrPassword"
+      class="inputError"
+      style="color: red; padding-top: 1rem"
+    ></small>
+
+    <!-- EMAIL -->
+    <label for="email">E-mail</label>
+    <input
+      type="email"
+      name="email"
+      id="email"
+      size="15"
+      maxlength="50"
+      required
+      [(ngModel)]="emailField"
+      #emailInput="ngModel"
+    />
+
+    <!-- PASSWORD -->
+    <label for="password">Senha</label>
+    <div class="togglePasswordContainer" id="togglePasswordContainer1">
+      <input
+        [type]="passwordVisible ? 'text' : 'password'"
+        name="password"
+        id="password"
+        size="15"
+        maxlength="50"
+        required
+        [(ngModel)]="passwordField"
+        #passwordInput="ngModel"
+      />
+
+      <button
+        type="button"
+        class="togglePasswordVisibility"
+        (click)="TogglePasswordVisibility()"
+        (mouseleave)="TogglePasswordVisibility(true)"
+      >
+        <img
+          src="../icons/icon_show.png"
+          alt="Mostrar Senha"
+          id="show-icon-1"
+          class="show-icon"
+          [style.display]="passwordVisible ? 'none' : 'block'"
+        />
+        <img
+          src="../icons/icon_hide.png"
+          alt="Ocultar Senha"
+          id="hide-icon-1"
+          class="hide-icon"
+          [style.display]="passwordVisible ? 'block' : 'none'"
+        />
+      </button>
+    </div>
+
+    <button type="submit" [disabled]="loginForm.invalid">ENTRAR</button>
+  </form>
+  <p id="signinRedirect">Não tem uma conta? <a routerLink="/signin">Cadastre-se</a></p>
+</section>

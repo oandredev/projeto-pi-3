@@ -1,0 +1,95 @@
+<div id="cartPage">
+  <div class="cart-area">
+    <h1>Carrinho</h1>
+
+    <table class="cart-table" *ngIf="cart && cart.items?.length; else emptyCart">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Qtd</th>
+          <th>Valor Base</th>
+          <th>Subtotal</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of cart.items">
+          <!-- ITEM -->
+          <td>
+            <strong>{{ item.offer?.name }}</strong>
+            <p>{{ getDescription(item) }}</p>
+          </td>
+
+          <!-- QTD -->
+          <td class="qtd-area">
+            <div class="qtd-area-inner">
+              <button class="qtd-btn minus" (click)="decreaseItem(item)">-</button>
+              <span>{{ item.quantity }}</span>
+
+              <button class="qtd-btn plus" (click)="increaseItem(item)">+</button>
+            </div>
+          </td>
+
+          <!-- VALUES -->
+          <td>R$ {{ getUnitValue(item) | number: '1.2-2' }}</td>
+          <td>R$ {{ getSubtotal(item) | number: '1.2-2' }}</td>
+
+          <!-- DELETE ITEM -->
+          <td>
+            <button class="delete-btn" (click)="removeItem(item)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div id="cartTotalBox" *ngIf="cart?.valueTotal">
+      <h2>Total:</h2>
+      <p>R$ {{ cart?.valueTotal | number: '1.2-2' }}</p>
+    </div>
+
+    <ng-template #emptyCart>
+      <p class="empty">Seu carrinho está vazio.</p>
+    </ng-template>
+  </div>
+
+  <aside *ngIf="cart && cart.items?.length" class="payment-area">
+    <h2>Pagamento</h2>
+
+    <div class="payment-options">
+      <label>
+        <input type="radio" name="payment" [(ngModel)]="paymentMethod" value="pix" />
+        PIX
+      </label>
+
+      <label>
+        <input type="radio" name="payment" [(ngModel)]="paymentMethod" value="debito" />
+        Débito
+      </label>
+
+      <label>
+        <input type="radio" name="payment" [(ngModel)]="paymentMethod" value="credito" />
+        Crédito
+      </label>
+      <label>
+        <input type="radio" name="payment" [(ngModel)]="paymentMethod" value="boleto" />
+        Boleto
+      </label>
+    </div>
+
+    <div *ngIf="paymentMethod === 'credito'" class="installments-box">
+      <label>Parcelas: </label>
+      <select [(ngModel)]="installments">
+        <option [value]="0" disabled selected>Selecione a quantidade de parcelas</option>
+
+        <option *ngFor="let p of [1, 2, 3, 4, 5, 6]" [value]="p">
+          {{ p }}x de {{ +(cart.valueTotal ?? 0) / p | number: '1.2-2' }}
+        </option>
+      </select>
+    </div>
+
+    <button class="finish-btn" (click)="finishOrder()" [disabled]="!isOrderValid()">
+      Finalizar Compra
+    </button>
+  </aside>
+</div>

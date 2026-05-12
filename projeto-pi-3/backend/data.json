@@ -1,0 +1,26 @@
+{
+  "loggedUser": {
+    "id": 1,
+    "user": null
+  },
+  "users": [
+    {
+      "id": "1234",
+      "name": "Teste Testando",
+      "email": "teste@gmail.com",
+      "password": "Teste12345Aa.",
+      "cpf": "47438691020"
+    }
+  ],
+  "offers": [
+    {
+      "id": "1",
+      "name": "Game Teste",
+      "priceBase": "50.00",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies lacinia, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc.",
+      "images": ["/offersImages/game_teste_capa.png"]
+    }
+  ],
+  "cart": [],
+  "history": []
+}

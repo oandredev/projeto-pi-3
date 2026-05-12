@@ -1,0 +1,15 @@
+<div class="offers-grid">
+  <div *ngFor="let offers of offers" class="offer-card" (click)="goToDetails(offers.id)">
+    <div class="image-container">
+      <img [src]="offers.imageUrl" [alt]="'Imagem da ' + offers.name" class="offer-image" />
+    </div>
+
+    <div class="card-content">
+      <h3>{{ offers.name }}</h3>
+
+      <p class="price">R$ {{ offers.price | number: '1.2-2' }}</p>
+
+      <button class="details-button">Ver Detalhes</button>
+    </div>
+  </div>
+</div>

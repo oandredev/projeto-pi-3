@@ -1,0 +1,9 @@
+#mask-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 70px;
+  pointer-events: none;
+  visibility: hidden;
+}

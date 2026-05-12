@@ -1,0 +1,48 @@
+<section class="container">
+  <h1 class="title">Histórico de Pedidos</h1>
+
+  <div *ngIf="historyList.length === 0" class="empty-state">
+    <p>Você ainda não tem pedidos no histórico.</p>
+    <a href="/offers" class="btn-offers">Ver Ofertas</a>
+  </div>
+
+  <div *ngFor="let entry of historyList; let i = index">
+    <div class="history-card">
+      <div class="card-header">
+        <h2>PEDIDO: #{{ entry.id }} - STATUS: ({{ entry.status }})</h2>
+        <p>Data: {{ entry.cart.date }}</p>
+      </div>
+
+      <div class="card-body">
+        <div class="detail-group">
+          <p><strong>Pagamento:</strong> {{ formatPaymentMethod(entry.cart.paymentMethod) }}</p>
+        </div>
+
+        <div class="cart-table history-items">
+          <div class="cart-row header-row">
+            <span class="col-item">Item</span>
+            <span class="col-qty">Qtd</span>
+            <span class="col-value-base">Valor</span>
+          </div>
+
+          <div *ngFor="let item of entry.cart.items" class="cart-row item-row">
+            <span class="col-item">
+              {{ item.offer.name ?? '' }}
+              <br />
+            </span>
+            <span class="col-qty">{{ item.quantity }}</span>
+            <span class="col-value-base">R$ {{ item.subtotal }}</span>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <p class="total-amount">
+            <strong>Total do Pedido: R$ {{ entry.cart.valueTotal }}</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <hr *ngIf="i < historyList.length - 1" class="separator" />
+  </div>
+</section>

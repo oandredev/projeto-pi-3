@@ -13,14 +13,80 @@
     }
   ],
   "offers": [
-    {
-      "id": "1",
-      "name": "Game Teste",
-      "priceBase": "50.00",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies lacinia, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc.",
-      "images": ["/offersImages/game_teste_capa.png"]
-    }
-  ],
+  {
+    "id": 1,
+    "name": "Tactical Strike",
+    "price": 59.90,
+    "imageUrl": "images/css1.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Frontline Warfare",
+    "price": 89.99,
+    "imageUrl": "images/css2.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Super Odyssey",
+    "price": 149.90,
+    "imageUrl": "images/mario1.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Mushroom Kingdom",
+    "price": 120.00,
+    "imageUrl": "images/mario2.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Neon Drift: Underground",
+    "price": 39.90,
+    "imageUrl": "images/speed1.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Championship Asphalt",
+    "price": 79.99,
+    "imageUrl": "images/speed2.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Combat: Shadow Arenas",
+    "price": 110.50,
+    "imageUrl": "images/mortal1.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Stellar Horizon: Galaxy",
+    "price": 45.00,
+    "imageUrl": "images/space1.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Bichin Quest",
+    "price": 19.99,
+    "imageUrl": "images/bichin1.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Fairy Tale: Legends",
+    "price": 34.90,
+    "imageUrl": "images/fada1.jpg"
+  },
+  {
+    "id": 11,
+    "name": "Cyber Warrior Chronicle",
+    "price": 95.00,
+    "imageUrl": "images/mulher1.jpg"
+  },
+  {
+    "id": 12,
+    "name": "Undead Apocalypse Survivor",
+    "price": 29.99,
+    "imageUrl": "images/zumbi1.jpg"
+  }
+],
+
   "cart": [],
   "history": []
 }

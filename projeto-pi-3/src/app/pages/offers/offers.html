@@ -1,15 +1,42 @@
-<div class="offers-grid">
-  <div *ngFor="let offers of offers" class="offer-card" (click)="goToDetails(offers.id)">
-    <div class="image-container">
-      <img [src]="offers.imageUrl" [alt]="'Imagem da ' + offers.name" class="offer-image" />
+<div class="hero-banner">
+  <div class="hero-overlay">
+    <div class="hero-content">
+      <span class="badge-tag">Mundial e Inédito</span>
+      <h1 class="hero-title">CYBER CHRONICLES 2026</h1>
+      <p class="hero-description">
+        Entre no submundo tecnológico neste novo RPG de ação futurista dos mesmos criadores de
+        grandes sucessos do gênero. Garanta o seu na pré-venda exclusiva aqui na A&F Games.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-primary-tech">Reserve Agora</button>
+        <button class="btn-secondary-tech"><span class="plus-icon">+</span> Wishlist</button>
+      </div>
     </div>
+  </div>
+</div>
 
-    <div class="card-content">
-      <h3>{{ offers.name }}</h3>
+<div class="carousel-container"></div>
+<div class="carousel-container">
+  <div class="carousel-header">
+    <h2>Descubra algo novo <span class="arrow-title">&gt;</span></h2>
+    <div class="carousel-nav-buttons">
+      <button (click)="scrollLeft()" class="nav-btn">‹</button>
+      <button (click)="scrollRight()" class="nav-btn">›</button>
+    </div>
+  </div>
 
-      <p class="price">R$ {{ offers.price | number: '1.2-2' }}</p>
+  <div class="carousel-track" #carouselTrack>
+    <div *ngFor="let offer of offers" class="offer-card" (click)="goToDetails(offer.id)">
+      <div class="image-container">
+        <img [src]="offer.imageUrl" [alt]="'Imagem da ' + offer.name" class="offer-image" />
+      </div>
 
-      <button class="details-button">Ver Detalhes</button>
+      <div class="card-content">
+        <span class="game-type">Jogo base</span>
+        <h3>{{ offer.name }}</h3>
+        <p class="price">R$ {{ offer.price | number: '1.2-2' }}</p>
+        <button class="details-button">Ver Detalhes</button>
+      </div>
     </div>
   </div>
 </div>

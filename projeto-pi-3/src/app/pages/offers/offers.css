@@ -1,44 +1,204 @@
-.offers-grid {
-  display: grid;
-  /* CHAVE PARA 4 COLUNAS: Define 4 colunas de tamanho flexível */
-  grid-template-columns: repeat(
-    4,
-    minmax(200px, 1fr)
-  ); /* Agora força 4 colunas, largura mínima ajustada para caber */
-  gap: 2rem 1.5rem; /* Reduz  o gap para caber mais */
-  padding: 2rem 1.5rem;
-  justify-items: center;
+.hero-banner {
+  position: relative;
+  width: min(100%, 1200px);
+  height: 420px;
+  margin: 0 auto 2.5rem auto;
+  border-radius: 12px;
+  background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.hero-overlay {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(18, 18, 18, 0.95) 30%, rgba(18, 18, 18, 0.4) 70%, rgba(18, 18, 18, 0.1) 100%),
+    linear-gradient(to top, rgba(18, 18, 18, 0.8) 0%, transparent 40%);
+  display: flex;
+  align-items: center;
+  padding: 0 3rem;
+  box-sizing: border-box;
+}
+
+
+.hero-content {
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.badge-tag {
+  background-color: #7b2cbf;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+  box-shadow: 0 0 10px rgba(123, 44, 191, 0.4);
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0 0 1rem 0;
+  line-height: 1.1;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.hero-description {
+  font-size: 14px;
+  color: #cccccc;
+  line-height: 1.6;
+  margin: 0 0 2rem 0;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-primary-tech {
+  background: #7b2cbf;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 13px;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.btn-primary-tech:hover {
+  background: #9d4edd;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(157, 78, 221, 0.4);
+}
+
+.btn-secondary-tech {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 13px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary-tech:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #ffffff;
+}
+
+.plus-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.carousel-container {
+  background-color: #121212;
+  padding: 2rem 0;
   width: min(100%, 1200px);
   margin: 0 auto;
+  color: #1E1E1E;
+  font-family: sans-serif;
+  border-radius: 15px;
+}
+
+.carousel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.carousel-header h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  color: #ffffff;
+}
+
+.carousel-nav-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-btn {
+  background-color: #66c0f4;
+  border: none;
+  color: #fff;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  font-size: 22px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.nav-btn:hover {
+  background-color: #303030;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px 5px;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-track {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .offer-card {
+  flex: 0 0 calc(25% - 1.2rem);
+  min-width: 200px;
+  max-width: 280px;
   cursor: pointer;
-  background-color: #ffffff;
-
+  background-color: #1e1e1e;
+  border-top: 0.2rem solid #9D4EDD;
+  border-bottom: 5px solid #66c0f4;
   border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-
-  border-top: 0.2rem solid #004f26;
-  border-bottom: 5px solid #ce2b37;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 
   overflow: hidden;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-  width: 100%;
-  max-width: 280px; /* Largura máxima reduzida para garantir espaço para 4 */
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Efeito de destaque no hover do card */
 .offer-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
 }
 
 .image-container {
   width: 100%;
-  height: 180px; /* Altura ajustada para caber melhor no layout de 4 colunas */
+  height: 270px;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -52,34 +212,47 @@
   transition: transform 0.5s ease;
 }
 
-/* Efeito de zoom na imagem */
 .offer-card:hover .offer-image {
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
 .card-content {
-  padding: 0.8rem 1rem; /* Padding reduzido para economizar espaço vertical */
+  padding: 1rem;
   text-align: center;
-  color: #333;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.game-type {
+  font-size: 11px;
+  color: #7a7a7a;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+  display: block;
 }
 
 .card-content h3 {
   margin-top: 0;
-  margin-bottom: 0.4rem;
-  color: #333;
-  font-size: 1.3em;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+  font-size: 1.2em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .card-content .price {
   font-size: 1.1em;
   font-weight: bold;
-  color: #004f26;
+  color: #66c0f4;
   margin-bottom: 0.8rem;
+  margin-top: auto;
 }
 
-/* BOTÃO "Ver Detalhes" é pra mudar pra verde */
 .details-button {
-  background: #004f26;
+  background: #9D4EDD;
   color: #fff;
   font-weight: bold;
   padding: 0.6rem 1rem;
@@ -88,12 +261,11 @@
   cursor: pointer;
   font-size: 0.95em;
   width: 100%;
-  transition: 0.3s ease;
+  transition: background 0.3s ease, transform 0.1s ease;
 }
 
 .details-button:hover {
-  background: #b32431;
-  transform: scale(1.01);
+  background: #66c0f4;
 }
 
 .details-button:active {

@@ -1,45 +1,72 @@
-/* CONFIGURAÇÃO BASE DA PÁGINA */
 #about-us-container {
-  width: min(100%, 1200px);
-  margin: 3rem auto;
-  padding: 2rem;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  width: min(100%, 1350px);
+  margin: 4rem auto;
+  padding: 4rem;
+  border-radius: 30px;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top,
+      rgba(123, 44, 191, 0.25),
+      transparent 35%),
+    radial-gradient(circle at bottom right,
+      rgba(102, 192, 244, 0.12),
+      transparent 30%),
+    linear-gradient(to bottom,
+      #050816,
+      #0b0117);
+  border: 1px solid rgba(157, 78, 221, 0.12);
+  box-shadow:
+    0 0 40px rgba(123, 44, 191, 0.15),
+    0 0 120px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(12px);
+  box-sizing: border-box;
 }
 
-h1 {
-  color: #004f26; /* Verde Principal */
-  font-size: 2.5rem;
-  border-bottom: 5px solid #ce2b37; /* Linha de destaque Vermelha/Vinho */
-  padding-bottom: 0.75rem;
-  margin-bottom: 1.5rem;
+#about-us-container h1 {
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 800;
+  line-height: 1.05;
   text-align: center;
+  margin-bottom: 2rem;
+  background: linear-gradient(to right,
+      #ffffff,
+      #d8b4fe,
+      #66c0f4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  border: none;
+  text-shadow: 0 0 30px rgba(157, 78, 221, 0.3);
 }
 
-h2 {
-  color: black;
+#about-us-container h2 {
+  color: #ffffff;
   font-size: 2rem;
   margin-bottom: 2rem;
   text-align: center;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
 }
 
-h3 {
-  color: #ce2b37; /* Vermelho/Vinho de Destaque */
+#about-us-container h3 {
+  color: #9d4edd;
   margin-top: 0.5rem;
   font-size: 1.5rem;
   text-align: center;
+  text-shadow: 0 0 10px rgba(123, 44, 191, 0.5);
+  /* Brilho neon suave */
 }
 
-p {
-  color: black;
+#about-us-container p {
+  color: #cccccc;
+  /* Texto de Descrição Unificado (Cinza Claríssimo) */
   text-align: center;
+  line-height: 1.6;
 }
 
 .lead-text {
   font-size: 1.3rem;
   font-style: italic;
-  color: black;
+  color: #cccccc;
   text-align: center;
   max-width: 800px;
   margin: 0 auto 2rem;
@@ -48,32 +75,44 @@ p {
 .divider {
   border: none;
   height: 5px;
-  background: linear-gradient(to right, #004f26, #ccc, #ce2b37);
+  background: linear-gradient(to right, #7b2cbf, #555, #66c0f4);
   margin: 4rem 0;
 }
 
-/* --- SEÇÃO 1: HERO IMPACTANTE --- */
 .hero-section {
   padding-bottom: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  flex-wrap: wrap;
 }
 
 .image-frame {
-  width: 100%;
-  height: 450px;
+  flex: 1;
+  min-width: 320px;
   overflow: hidden;
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 24px;
+  position: relative;
+  border: 1px solid rgba(157, 78, 221, 0.15);
+  box-shadow:
+    0 0 30px rgba(123, 44, 191, 0.25),
+    0 0 80px rgba(102, 192, 244, 0.15);
+  transition: 0.4s ease;
+}
+
+.image-frame:hover {
+  transform: translateY(-8px);
 }
 
 .full-width-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
+  transition: transform 0.5s ease;
 }
 
-/* --- SEÇÃO 2: PILARES VISUAIS (GRID) --- */
 .pillars-section {
   padding-top: 2rem;
 }
@@ -86,19 +125,28 @@ p {
 }
 
 .pillar-card {
-  background-color: #f7f7f7;
-  border-radius: 8px;
-  overflow: hidden;
-  padding-bottom: 1rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border-top: 4px solid #ce2b37;
-  border-bottom: 5px solid #004f26;
-  transition: transform 0.3s ease;
+  .pillar-card {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 24px;
+    overflow: hidden;
+    padding-bottom: 1rem;
+    border: 1px solid rgba(157, 78, 221, 0.15);
+    backdrop-filter: blur(10px);
+    box-shadow:
+      0 0 20px rgba(0, 0, 0, 0.4);
+    transition:
+      transform 0.4s ease,
+      box-shadow 0.4s ease,
+      border 0.4s ease;
+  }
 }
 
 .pillar-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(-12px);
+  border-color: #9d4edd;
+  box-shadow:
+    0 0 30px rgba(157, 78, 221, 0.25),
+    0 0 80px rgba(102, 192, 244, 0.15);
 }
 
 .pillar-image-container {
@@ -106,12 +154,14 @@ p {
   height: 200px;
   overflow: hidden;
   margin-bottom: 1rem;
+  transition: transform 0.5s ease;
 }
 
 .pillar-image-container img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 .pillar-card h3 {
@@ -123,7 +173,6 @@ p {
   font-size: 0.95rem;
 }
 
-/* --- SEÇÃO 3: CHAMADA PARA AÇÃO --- */
 .call-to-action-section {
   text-align: center;
   padding: 2rem 0;
@@ -136,32 +185,32 @@ p {
   overflow: hidden;
   border-radius: 8px;
   margin: 2rem auto;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  border: 3px solid #004f26;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  border: 3px solid #7b2cbf;
 }
 
 .team-image-frame img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 .offers-button {
   display: inline-block;
-  background-color: #004f26; /* Cor de destaque para o CTA */
+  background-color: #7b2cbf;
   color: white;
   font-weight: bold;
   font-size: 1.1rem;
   padding: 1rem 2.5rem;
   border-radius: 6px;
   text-decoration: none;
-  transition:
-    background-color 0.3s,
-    transform 0.2s;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
   margin-top: 1.5rem;
 }
 
 .offers-button:hover {
-  background-color: #b32431;
+  background-color: #9d4edd;
   transform: scale(1.03);
+  box-shadow: 0 5px 15px rgba(157, 78, 221, 0.5);
 }

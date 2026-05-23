@@ -1,3 +1,4 @@
+<!-- HTML -->
 <div class="hero-banner">
   <div class="hero-overlay">
     <div class="hero-content">
@@ -15,7 +16,6 @@
   </div>
 </div>
 
-<div class="carousel-container"></div>
 <div class="carousel-container">
   <div class="carousel-header">
     <h2>Descubra algo novo <span class="arrow-title">&gt;</span></h2>
@@ -30,12 +30,33 @@
       <div class="image-container">
         <img [src]="offer.imageUrl" [alt]="'Imagem da ' + offer.name" class="offer-image" />
       </div>
-
       <div class="card-content">
         <span class="game-type">Jogo base</span>
         <h3>{{ offer.name }}</h3>
         <p class="price">R$ {{ offer.price | number: '1.2-2' }}</p>
         <button class="details-button">Ver Detalhes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="featured-wrapper">
+  <div class="featured-header">
+    <h2>Destaques do mês na A&F Games <span class="arrow-title">&gt;</span></h2>
+  </div>
+
+  <div class="featured-content">
+    <div class="featured-banner">
+      <img src="images/bannerPromocional.png" alt="Banner" />
+    </div>
+
+    <div class="featured-grid">
+      <div *ngFor="let offer of offers.slice(0, 8)" class="featured-item">
+        <img [src]="offer.imageUrl" alt="Game" />
+        <div class="item-info">
+          <span>{{ offer.name }}</span>
+          <small>R$ {{ offer.price | number: '1.2-2' }}</small>
+        </div>
       </div>
     </div>
   </div>

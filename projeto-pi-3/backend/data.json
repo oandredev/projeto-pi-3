@@ -13,79 +13,79 @@
     }
   ],
   "offers": [
-  {
-    "id": 1,
-    "name": "Tactical Strike",
-    "price": 59.90,
-    "imageUrl": "images/css1.jpg"
-  },
-  {
-    "id": 2,
-    "name": "Frontline Warfare",
-    "price": 89.99,
-    "imageUrl": "images/css2.jpg"
-  },
-  {
-    "id": 3,
-    "name": "Super Odyssey",
-    "price": 149.90,
-    "imageUrl": "images/mario1.jpg"
-  },
-  {
-    "id": 4,
-    "name": "Mushroom Kingdom",
-    "price": 120.00,
-    "imageUrl": "images/mario2.jpg"
-  },
-  {
-    "id": 5,
-    "name": "Neon Drift: Underground",
-    "price": 39.90,
-    "imageUrl": "images/speed1.jpg"
-  },
-  {
-    "id": 6,
-    "name": "Championship Asphalt",
-    "price": 79.99,
-    "imageUrl": "images/speed2.jpg"
-  },
-  {
-    "id": 7,
-    "name": "Combat: Shadow Arenas",
-    "price": 110.50,
-    "imageUrl": "images/mortal1.jpg"
-  },
-  {
-    "id": 8,
-    "name": "Stellar Horizon: Galaxy",
-    "price": 45.00,
-    "imageUrl": "images/space1.jpg"
-  },
-  {
-    "id": 9,
-    "name": "Bichin Quest",
-    "price": 19.99,
-    "imageUrl": "images/bichin1.jpg"
-  },
-  {
-    "id": 10,
-    "name": "Fairy Tale: Legends",
-    "price": 34.90,
-    "imageUrl": "images/fada1.jpg"
-  },
-  {
-    "id": 11,
-    "name": "Cyber Warrior Chronicle",
-    "price": 95.00,
-    "imageUrl": "images/mulher1.jpg"
-  },
-  {
-    "id": 12,
-    "name": "Undead Apocalypse Survivor",
-    "price": 29.99,
-    "imageUrl": "images/zumbi1.jpg"
-  }
-],
+    {
+      "id": 1,
+      "name": "SkyFire Ascendant",
+      "price": 59.9,
+      "imageUrl": "images/skyfire.png"
+    },
+    {
+      "id": 2,
+      "name": "Apocalypse",
+      "price": 79.99,
+      "imageUrl": "images/zombie.png"
+    },
+    {
+      "id": 3,
+      "name": "Jungle Ascendant",
+      "price": 89.99,
+      "imageUrl": "images/primata.png"
+    },
+    {
+      "id": 4,
+      "name": "Skyline Strike",
+      "price": 39.9,
+      "imageUrl": "images/skyLine.png"
+    },
+    {
+      "id": 5,
+      "name": "Prehistoric ",
+      "price": 149.9,
+      "imageUrl": "images/dino.png"
+    },
+    {
+      "id": 6,
+      "name": "Street Strike",
+      "price": 120.0,
+      "imageUrl": "images/streetCar.png"
+    },
+    {
+      "id": 7,
+      "name": "Combat: Shadow Arenas",
+      "price": 110.5,
+      "imageUrl": "images/combat.png"
+    },
+    {
+      "id": 8,
+      "name": "Floria",
+      "price": 45.0,
+      "imageUrl": "images/floria.png"
+    },
+    {
+      "id": 9,
+      "name": "Pilot: Fire & Rescue",
+      "price": 19.99,
+      "imageUrl": "images/pilot.png"
+    },
+    {
+      "id": 10,
+      "name": "Super Cogumelo",
+      "price": 34.9,
+      "imageUrl": "images/super.png"
+    },
+    {
+      "id": 11,
+      "name": "Strike Protocol",
+      "price": 95.0,
+      "imageUrl": "images/aviation2.png"
+    },
+    {
+      "id": 12,
+      "name": "Grand GP: Nitro",
+      "price": 29.99,
+      "imageUrl": "images/grandGP.png"
+    }
+  ],
 
   "cart": [],
   "history": []

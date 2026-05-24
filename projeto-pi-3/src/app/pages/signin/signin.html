@@ -4,120 +4,270 @@
     <hr />
   </div>
 
-  <p>Crie sua conta agora mesmo. Rápido e prático</p>
+  <p>Crie sua conta agora mesmo. Rápido e prático.</p>
 
-  <form #form="ngForm" id="formSignin" (ngSubmit)="TryRegisterUser()">
-    <!-- NOME -->
-    <label for="name">Nome Completo <span style="color: red">*</span></label>
-    <small id="errorName" class="inputError"></small>
-
-    <input
-      type="text"
-      name="name"
-      id="name"
-      maxlength="50"
-      required
-      [(ngModel)]="nameField"
-      (blur)="UpdateFirstInput('name')"
-      (input)="NameIsValid(nameField); checkForm()"
-    />
-
-    <!-- CPF -->
-    <label for="cpf">CPF <span style="color: red">*</span></label>
-    <small id="errorCPF" class="inputError"></small>
-
-    <input
-      type="text"
-      name="cpf"
-      id="cpf"
-      maxlength="14"
-      required
-      [(ngModel)]="cpfField"
-      (blur)="UpdateFirstInput('cpf')"
-      (input)="$event.target.value = formatCPF(cpfField); CPFIsValid(cpfField); checkForm()"
-    />
-
-    <!-- EMAIL -->
-    <label for="email">E-mail <span style="color: red">*</span></label>
-    <small id="errorEmail" class="inputError"></small>
-
-    <input
-      type="email"
-      name="email"
-      id="email"
-      maxlength="50"
-      required
-      [(ngModel)]="emailField"
-      (blur)="UpdateFirstInput('email')"
-      (input)="EmailIsValid(emailField); checkForm()"
-    />
-
-    <!-- SENHA -->
-    <label for="password">Senha <span style="color: red">*</span></label>
-    <small id="errorPassword" class="inputError"></small>
-
-    <div class="togglePasswordContainer" id="togglePasswordContainer1">
-      <input
-        type="password"
-        name="password"
-        id="password"
-        maxlength="50"
-        required
-        [(ngModel)]="passwordField"
-        (blur)="UpdateFirstInput('password')"
-        (input)="PasswordIsValid(passwordField); PasswordsAreValid(); checkForm()"
-      />
-
-      <button
-        type="button"
-        class="togglePasswordVisibility"
-        (click)="TogglePasswordVisibility('1')"
-        (mouseleave)="TogglePasswordVisibility('1', true)"
-      >
-        <img src="../icons/icon_show.png" id="show-icon-1" class="show-icon" />
-        <img
-          src="../icons/icon_hide.png"
-          id="hide-icon-1"
-          class="hide-icon"
-          style="display: none"
+  <form id="formSignin" (ngSubmit)="TryRegisterUser()" (keydown.enter)="focusNext($event)">
+    <div class="tipo-pessoa">
+      <label>
+        <input
+          type="radio"
+          name="tipoPessoa"
+          value="PF"
+          [checked]="tipoPessoa === 'PF'"
+          (change)="trocarTipoPessoa('PF')"
         />
-      </button>
+        Pessoa Física
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="tipoPessoa"
+          value="PJ"
+          [checked]="tipoPessoa === 'PJ'"
+          (change)="trocarTipoPessoa('PJ')"
+        />
+        Pessoa Jurídica
+      </label>
     </div>
 
-    <!-- CONFIRMAR SENHA -->
-    <label for="passwordConfirmation">Confirmação da Senha <span style="color: red">*</span></label>
-    <small id="errorPasswordC" class="inputError"></small>
+    <div class="form-row">
+      <div class="form-group" *ngIf="tipoPessoa === 'PF'">
+        <label for="cpf">CPF <span>*</span></label>
 
-    <div class="togglePasswordContainer" id="togglePasswordContainer2">
-      <input
-        type="password"
-        name="passwordConfirmation"
-        id="passwordConfirmation"
-        maxlength="50"
-        required
-        [(ngModel)]="passwordConfirmationField"
-        (blur)="UpdateFirstInput('passwordC')"
-        (input)="PasswordsAreValid(); checkForm()"
-      />
-
-      <button
-        type="button"
-        class="togglePasswordVisibility"
-        (click)="TogglePasswordVisibility('2')"
-        (mouseleave)="TogglePasswordVisibility('2', true)"
-      >
-        <img src="../icons/icon_show.png" id="show-icon-2" class="show-icon" />
-        <img
-          src="../icons/icon_hide.png"
-          id="hide-icon-2"
-          class="hide-icon"
-          style="display: none"
+        <input
+          type="text"
+          name="cpf"
+          id="cpf"
+          maxlength="14"
+          required
+          [(ngModel)]="cpfField"
+          (keydown)="onlyNumbers($event)"
+          (input)="onCPFInput()"
+          (blur)="UpdateFirstInput('cpf'); CPFIsValid(cpfField)"
+          placeholder="000.000.000-00"
+          [class.input-invalid]="cpfError !== ''"
         />
-      </button>
+
+        <small class="inputError" *ngIf="cpfError">{{ cpfError }}</small>
+      </div>
+
+      <div class="form-group" *ngIf="tipoPessoa === 'PJ'">
+        <label for="cnpj">CNPJ <span>*</span></label>
+
+        <input
+          type="text"
+          name="cnpj"
+          id="cnpj"
+          maxlength="18"
+          required
+          [(ngModel)]="cnpjField"
+          (keydown)="onlyNumbers($event)"
+          (input)="onCNPJInput()"
+          (blur)="UpdateFirstInput('cnpj'); CNPJIsValid(cnpjField); buscarRazaoSocial()"
+          placeholder="00.000.000/0000-00"
+          [class.input-invalid]="cnpjError !== ''"
+        />
+
+        <small class="inputError" *ngIf="cnpjError">{{ cnpjError }}</small>
+      </div>
+
+      <div class="form-group" style="flex: 1.2">
+        <label for="name">
+          {{ tipoPessoa === 'PF' ? 'Nome Completo' : 'Razão Social' }}
+          <span>*</span>
+        </label>
+
+        <input
+          type="text"
+          name="name"
+          id="name"
+          maxlength="50"
+          required
+          [(ngModel)]="nameField"
+          (keydown)="validateNameInput($event)"
+          (input)="onNameInput()"
+          (blur)="UpdateFirstInput('name'); NameIsValid(nameField)"
+          placeholder="Digite seu nome"
+          [class.input-invalid]="nameError !== ''"
+        />
+
+        <small class="inputError" *ngIf="nameError">{{ nameError }}</small>
+      </div>
+
+      <div class="form-group" style="flex: 1.2">
+        <label for="email">E-mail <span>*</span></label>
+
+        <input
+          type="email"
+          name="email"
+          id="email"
+          maxlength="50"
+          required
+          [(ngModel)]="emailField"
+          (input)="UpdateFirstInput('email'); EmailIsValid(emailField)"
+          (blur)="UpdateFirstInput('email'); EmailIsValid(emailField)"
+          placeholder="Digite seu e-mail"
+          [class.input-invalid]="emailError !== ''"
+        />
+
+        <small class="inputError" *ngIf="emailError">{{ emailError }}</small>
+      </div>
     </div>
 
-    <button id="buttonSubmit" type="submit" disabled>ENTRAR</button>
+    <div class="form-row">
+      <div class="form-group" style="flex: 1">
+        <label for="cep">CEP <span>*</span></label>
+
+        <div class="cep-container">
+          <input
+            type="text"
+            name="cep"
+            id="cep"
+            maxlength="8"
+            required
+            [(ngModel)]="cepField"
+            (keydown)="onlyNumbers($event)"
+            (input)="onCEPInput()"
+            (blur)="buscarCEP()"
+            placeholder="Apenas números"
+          />
+
+          <button type="button" class="button-buscar" (click)="buscarCEP()">Buscar</button>
+        </div>
+
+        <small class="inputError" *ngIf="cepError">{{ cepError }}</small>
+      </div>
+
+      <div class="form-group" style="flex: 1.2">
+        <label for="logradouro">Logradouro</label>
+
+        <input
+          type="text"
+          name="logradouro"
+          id="logradouro"
+          [(ngModel)]="logradouroField"
+          disabled
+        />
+      </div>
+
+      <div class="form-group" style="flex: 0.5">
+        <label for="numero">Número <span>*</span></label>
+
+        <input
+          type="text"
+          name="numero"
+          id="numero"
+          maxlength="10"
+          required
+          [(ngModel)]="numeroField"
+          (keydown)="onlyNumbers($event)"
+          (input)="onNumeroInput()"
+          placeholder="Nº"
+          [class.input-invalid]="numeroError !== ''"
+        />
+
+        <small class="inputError" *ngIf="numeroError">{{ numeroError }}</small>
+      </div>
+
+      <div class="form-group" style="flex: 1">
+        <label for="bairro">Bairro</label>
+
+        <input type="text" name="bairro" id="bairro" [(ngModel)]="bairroField" disabled />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group" style="flex: 1.5">
+        <label for="localidade">Cidade</label>
+
+        <input
+          type="text"
+          name="localidade"
+          id="localidade"
+          [(ngModel)]="localidadeField"
+          disabled
+        />
+      </div>
+
+      <div class="form-group" style="flex: 0.5">
+        <label for="uf">UF</label>
+
+        <input type="text" name="uf" id="uf" [(ngModel)]="ufField" disabled />
+      </div>
+
+      <div class="form-group" style="flex: 1">
+        <label for="password">Senha <span>*</span></label>
+
+        <div class="togglePasswordContainer" id="togglePasswordContainer1">
+          <input
+            type="password"
+            name="password"
+            id="password"
+            minlength="8"
+            maxlength="12"
+            required
+            [(ngModel)]="passwordField"
+            (input)="UpdateFirstInput('password'); PasswordIsValid(passwordField)"
+            placeholder="Digite sua senha"
+            [class.input-invalid]="passwordError !== ''"
+          />
+
+          <button
+            type="button"
+            class="togglePasswordVisibility"
+            (click)="TogglePasswordVisibility('1')"
+            (mouseleave)="TogglePasswordVisibility('1', true)"
+          >
+            <img src="../icons/icon_show.png" id="show-icon-1" class="show-icon" />
+            <img src="../icons/icon_hide.png" id="hide-icon-1" class="hide-icon" />
+          </button>
+        </div>
+
+        <small class="inputError" *ngIf="passwordError">{{ passwordError }}</small>
+      </div>
+
+      <div class="form-group" style="flex: 1">
+        <label for="passwordConfirmation">Confirmação <span>*</span></label>
+
+        <div class="togglePasswordContainer" id="togglePasswordContainer2">
+          <input
+            type="password"
+            name="passwordConfirmation"
+            id="passwordConfirmation"
+            minlength="8"
+            maxlength="12"
+            required
+            [(ngModel)]="passwordConfirmationField"
+            (input)="UpdateFirstInput('passwordC'); PasswordsAreValid()"
+            placeholder="Confirme sua senha"
+            [class.input-invalid]="passwordErrorMessage !== ''"
+          />
+
+          <button
+            type="button"
+            class="togglePasswordVisibility"
+            (click)="TogglePasswordVisibility('2')"
+            (mouseleave)="TogglePasswordVisibility('2', true)"
+          >
+            <img src="../icons/icon_show.png" id="show-icon-2" class="show-icon" />
+            <img src="../icons/icon_hide.png" id="hide-icon-2" class="hide-icon" />
+          </button>
+        </div>
+
+        <small class="inputError" *ngIf="passwordErrorMessage">
+          {{ passwordErrorMessage }}
+        </small>
+      </div>
+    </div>
+
+    <div class="submit-container">
+      <button id="buttonSubmit" type="submit" [disabled]="!formValido">CADASTRAR</button>
+    </div>
   </form>
 
-  <p id="loginRedirect">Já tem uma conta? <a routerLink="/login">Conectar</a></p>
+  <p id="loginRedirect">
+    Já tem uma conta?
+    <a routerLink="/login">Conectar</a>
+  </p>
 </section>

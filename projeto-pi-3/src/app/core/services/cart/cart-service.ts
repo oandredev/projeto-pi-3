@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Cart, CartItem, Offer } from '../../types/types';
+import { Cart, CartItem, Offer, History } from '../../types/types';
 import { BehaviorSubject, Observable, switchMap, map, throwError } from 'rxjs';
 import { UserLoginService } from '../userLogin/user-login';
 
@@ -8,8 +8,8 @@ import { UserLoginService } from '../userLogin/user-login';
   providedIn: 'root',
 })
 export class CartService {
-  /* APIs */
   private cartAPI = 'http://localhost:3000/cart';
+  private historyAPI = 'http://localhost:3000/history';
 
   private loggedUserId: string | null = null;
   cartCounter: BehaviorSubject<string> = new BehaviorSubject<string>('0');
@@ -23,25 +23,39 @@ export class CartService {
     });
   }
 
-  /* ==================================================== */
-
   addItem(offer: Offer): Observable<Cart> {
     if (!this.loggedUserId) {
       return throwError(() => new Error('Usuário não logado.'));
     }
 
-    const newItem: CartItem = {
-      id: crypto.randomUUID(), // <-- SEMPRE TEM ID
-      idUser: this.loggedUserId,
-      offer: offer,
-      quantity: '1',
-      subtotal: '0.00',
-    };
+    return this.userAlreadyBoughtGame(this.loggedUserId, offer.id).pipe(
+      switchMap((alreadyBought) => {
+        if (alreadyBought) {
+          return throwError(() => new Error('Você já possui este jogo na sua biblioteca.'));
+        }
 
-    return this.addItemForUser(this.loggedUserId, newItem);
+        const newItem: CartItem = {
+          id: crypto.randomUUID(),
+          idUser: this.loggedUserId!,
+          offer,
+          quantity: '1',
+          subtotal: String(this.getOfferPrice(offer).toFixed(2)),
+        };
+
+        return this.addItemForUser(this.loggedUserId!, newItem);
+      }),
+    );
   }
 
-  /* ==================================================== */
+  private userAlreadyBoughtGame(idUser: string, offerId: string): Observable<boolean> {
+    return this.http.get<History[]>(`${this.historyAPI}?idUser=${idUser}`).pipe(
+      map((historyList) => {
+        return historyList.some((history) =>
+          history.cart?.items?.some((item) => item.offer?.id === offerId),
+        );
+      }),
+    );
+  }
 
   private addItemForUser(idUser: string, item: CartItem): Observable<Cart> {
     return this.getCartByUser(idUser).pipe(
@@ -57,23 +71,19 @@ export class CartService {
     );
   }
 
-  /* ==================================================== */
-
   private addOrUpdateItem(cart: Cart, item: CartItem): Observable<Cart> {
     const items = [...(cart.items ?? [])];
 
-    const index = items.findIndex((i) => i.offer.id === item.offer.id);
+    const alreadyInCart = items.some((i) => i.offer.id === item.offer.id);
 
-    if (index !== -1) {
-      const currentQty = Number(items[index].quantity);
-      const addedQty = Number(item.quantity);
-
-      items[index].quantity = String(currentQty + addedQty);
-      items[index].subtotal = String(this.calculateItemSubtotal(items[index]).toFixed(2));
-    } else {
-      item.subtotal = String(this.calculateItemSubtotal(item).toFixed(2));
-      items.push(item);
+    if (alreadyInCart) {
+      return throwError(() => new Error('Este jogo já está no carrinho.'));
     }
+
+    item.quantity = '1';
+    item.subtotal = String(this.calculateItemSubtotal(item).toFixed(2));
+
+    items.push(item);
 
     const updated: Cart = {
       ...cart,
@@ -85,8 +95,6 @@ export class CartService {
       .put<Cart>(`${this.cartAPI}/${cart.id}`, updated)
       .pipe(switchMap((res) => this.updateCartCounter().pipe(map(() => res))));
   }
-
-  /* ==================================================== */
 
   private createCart(idUser: string): Observable<Cart> {
     const payload: Omit<Cart, 'id'> = {
@@ -103,14 +111,16 @@ export class CartService {
       .pipe(switchMap((res) => this.updateCartCounter().pipe(map(() => res))));
   }
 
-  /* ==================================================== */
-
   clearCart(): Observable<Cart> {
-    if (!this.loggedUserId) return throwError(() => new Error('Usuário não logado.'));
+    if (!this.loggedUserId) {
+      return throwError(() => new Error('Usuário não logado.'));
+    }
 
     return this.getCartByUser(this.loggedUserId).pipe(
       switchMap((cart) => {
-        if (!cart) return throwError(() => new Error('Carrinho não encontrado.'));
+        if (!cart) {
+          return throwError(() => new Error('Carrinho não encontrado.'));
+        }
 
         const updated: Cart = {
           ...cart,
@@ -125,64 +135,65 @@ export class CartService {
     );
   }
 
-  /* ==================================================== */
-
   private getCartByUser(idUser: string): Observable<Cart | null> {
     return this.http
       .get<Cart[]>(this.cartAPI)
       .pipe(map((carts) => carts.find((c) => c.idUser === idUser) || null));
   }
 
-  getCartOfLoggedUser() {
-    if (!this.loggedUserId) return throwError(() => new Error('Usuário não logado.'));
+  getCartOfLoggedUser(): Observable<Cart | null> {
+    if (!this.loggedUserId) {
+      return throwError(() => new Error('Usuário não logado.'));
+    }
 
     this.updateCartCounter().subscribe();
 
     return this.getCartByUser(this.loggedUserId);
   }
 
-  /* ==================================================== */
+  private getOfferPrice(offer: any): number {
+    const value = offer?.priceBase ?? offer?.price ?? 0;
 
-  private parsePrice(value: any): number {
-    if (value === null || value === undefined) return 0;
+    if (typeof value === 'number') {
+      return value;
+    }
 
     let str = String(value).trim();
-    str = str.replace('R$', '').replace(/\s/g, '');
-    str = str.replace(',', '.');
+    str = str.replace('R$', '').replace(/\s/g, '').replace(',', '.');
 
     const n = Number(str);
+
     return isNaN(n) ? 0 : n;
   }
 
   private calculateItemSubtotal(item: CartItem): number {
-    const offer = item.offer;
-    if (!offer) return 0;
-
-    const base = this.parsePrice(offer.priceBase);
-    const quantity = Number(item.quantity);
-
-    return base * quantity;
+    return this.getOfferPrice(item.offer) * Number(item.quantity || 1);
   }
 
   private calculateTotal(items: CartItem[]): number {
     return items.reduce((acc, item) => acc + this.calculateItemSubtotal(item), 0);
   }
 
-  /* ==================================================== */
-
   updateCartItem(item: CartItem): Observable<Cart> {
-    if (!this.loggedUserId) return throwError(() => new Error('Usuário não logado.'));
+    if (!this.loggedUserId) {
+      return throwError(() => new Error('Usuário não logado.'));
+    }
 
     return this.getCartByUser(this.loggedUserId).pipe(
       switchMap((cart) => {
-        if (!cart) return throwError(() => new Error('Carrinho não encontrado.'));
+        if (!cart) {
+          return throwError(() => new Error('Carrinho não encontrado.'));
+        }
 
         const items = [...(cart.items ?? [])];
         const index = items.findIndex((i) => i.id === item.id);
-        if (index === -1) return throwError(() => new Error('Item não encontrado no carrinho.'));
 
-        items[index].quantity = String(item.quantity);
-        items[index].subtotal = String(this.calculateItemSubtotal(item).toFixed(2));
+        if (index === -1) {
+          return throwError(() => new Error('Item não encontrado no carrinho.'));
+        }
+
+        items[index].quantity = '1';
+        items[index].subtotal = String(this.calculateItemSubtotal(items[index]).toFixed(2));
 
         const updated: Cart = {
           ...cart,
@@ -196,8 +207,6 @@ export class CartService {
       }),
     );
   }
-
-  /* ==================================================== */
 
   removeCartItem(itemId: string): Observable<Cart> {
     if (!this.loggedUserId) {
@@ -210,8 +219,7 @@ export class CartService {
           return throwError(() => new Error('Carrinho não encontrado.'));
         }
 
-        const targetId = String(itemId);
-        const items = (cart.items ?? []).filter((i) => String(i.id) !== targetId);
+        const items = (cart.items ?? []).filter((i) => String(i.id) !== String(itemId));
 
         const updated: Cart = {
           ...cart,
@@ -225,8 +233,6 @@ export class CartService {
       }),
     );
   }
-
-  /* ==================================================== */
 
   updateCartCounter(): Observable<number> {
     if (!this.loggedUserId) {

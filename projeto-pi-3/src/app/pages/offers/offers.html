@@ -47,11 +47,15 @@
 
   <div class="featured-content">
     <div class="featured-banner">
-      <img src="images/bannerPromocional.png" alt="Banner" />
+      <img src="images/destaquesMaio.png" alt="Banner" />
     </div>
 
     <div class="featured-grid">
-      <div *ngFor="let offer of offers.slice(0, 8)" class="featured-item">
+      <div
+        *ngFor="let offer of offers.slice(0, 8)"
+        class="featured-item"
+        (click)="goToDetails(offer.id)"
+      >
         <img [src]="offer.imageUrl" alt="Game" />
         <div class="item-info">
           <span>{{ offer.name }}</span>

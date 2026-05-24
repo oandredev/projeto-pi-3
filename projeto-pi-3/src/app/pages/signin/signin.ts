@@ -1,260 +1,510 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+
 import { User } from '../../core/types/types';
 import { UserRegister } from '../../core/services/userRegister/user-register';
+import { CepService } from '../../services/cep';
+import { CpfService } from '../../services/cpf';
+import { CnpjService } from '../../services/cnpj';
 
 @Component({
   selector: 'app-signin',
   standalone: true,
-  imports: [RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './signin.html',
   styleUrl: './signin.css',
 })
 export class Signin {
-  alertName!: HTMLElement;
-  alertCPF!: HTMLElement;
-  alertEmail!: HTMLElement;
-  alertPassword!: HTMLElement;
-  alertPasswordC!: HTMLElement;
-
-  firstInputName = true;
-  firstInputCPF = true;
-  firstInputEmail = true;
-  firstInputPassword = true;
-  firstInputPasswordC = true;
-
-  buttonSubmit!: HTMLButtonElement;
+  tipoPessoa: 'PF' | 'PJ' = 'PF';
 
   nameField = '';
   cpfField = '';
+  cnpjField = '';
   emailField = '';
   passwordField = '';
   passwordConfirmationField = '';
 
-  constructor(private userRegister: UserRegister, private router: Router) {}
+  cepField = '';
+  logradouroField = '';
+  bairroField = '';
+  numeroField = '';
+  localidadeField = '';
+  ufField = '';
 
-  ngOnInit(): void {
-    this.alertName = document.getElementById('errorName')!;
-    this.alertCPF = document.getElementById('errorCPF')!;
-    this.alertEmail = document.getElementById('errorEmail')!;
-    this.alertPassword = document.getElementById('errorPassword')!;
-    this.alertPasswordC = document.getElementById('errorPasswordC')!;
-    this.buttonSubmit = document.getElementById('buttonSubmit') as HTMLButtonElement;
+  firstInputName = true;
+  firstInputCPF = true;
+  firstInputCNPJ = true;
+  firstInputEmail = true;
+  firstInputPassword = true;
+  firstInputPasswordC = true;
+  firstInputNumero = true;
+
+  nameError = '';
+  cpfError = '';
+  cnpjError = '';
+  emailError = '';
+  passwordError = '';
+  passwordErrorMessage = '';
+  numeroError = '';
+  cepError = '';
+
+  formValido = false;
+
+  private ultimoCnpjBuscado = '';
+
+  constructor(
+    private userRegister: UserRegister,
+    private router: Router,
+    private cepService: CepService,
+    private cpfService: CpfService,
+    private cnpjService: CnpjService,
+  ) {}
+
+  trocarTipoPessoa(tipo: 'PF' | 'PJ'): void {
+    this.tipoPessoa = tipo;
+
+    this.cpfField = '';
+    this.cnpjField = '';
+    this.nameField = '';
+
+    this.firstInputCPF = true;
+    this.firstInputCNPJ = true;
+    this.firstInputName = true;
+
+    this.cpfError = '';
+    this.cnpjError = '';
+    this.nameError = '';
+    this.ultimoCnpjBuscado = '';
+
+    this.atualizarFormulario();
   }
 
-  /* ===================================================== */
+  onlyNumbers(event: KeyboardEvent): void {
+    const allowedKeys = [
+      'Backspace',
+      'Delete',
+      'ArrowLeft',
+      'ArrowRight',
+      'Tab',
+      'Enter',
+      'Home',
+      'End',
+    ];
 
-  onNameInput(): void {
-    this.nameField = this.nameField.replace(/[^A-Za-zÀ-ÿ\s]/g, '');
-    this.NameIsValid(this.nameField);
-    this.checkForm();
+    if (allowedKeys.includes(event.key)) {
+      return;
+    }
+
+    if (event.ctrlKey || event.metaKey) {
+      return;
+    }
+
+    if (!/^[0-9]$/.test(event.key)) {
+      event.preventDefault();
+    }
   }
 
-  onCPFInput(): void {
-    this.cpfField = this.cpfField.replace(/\D/g, '');
-    this.cpfField = this.formatCPF(this.cpfField);
-    this.CPFIsValid(this.cpfField);
-    this.checkForm();
-  }
+  validateNameInput(event: KeyboardEvent): void {
+    const allowedKeys = [
+      'Backspace',
+      'Delete',
+      'ArrowLeft',
+      'ArrowRight',
+      'Tab',
+      'Enter',
+      'Home',
+      'End',
+      ' ',
+    ];
 
-  onEmailInput(): void {
-    this.EmailIsValid(this.emailField);
-    this.checkForm();
-  }
+    if (allowedKeys.includes(event.key)) {
+      return;
+    }
 
-  onPasswordInput(): void {
-    this.PasswordIsValid(this.passwordField);
-    this.checkForm();
-  }
+    if (event.ctrlKey || event.metaKey) {
+      return;
+    }
 
-  onPasswordConfirmationInput(): void {
-    this.PasswordsAreValid();
-    this.checkForm();
+    if (!/^[A-Za-zÀ-ÿ]$/.test(event.key)) {
+      event.preventDefault();
+    }
   }
-
-  /* ===================================================== */
 
   UpdateFirstInput(field: string): void {
     switch (field) {
       case 'name':
         this.firstInputName = false;
         break;
+
       case 'cpf':
         this.firstInputCPF = false;
         break;
+
+      case 'cnpj':
+        this.firstInputCNPJ = false;
+        break;
+
       case 'email':
         this.firstInputEmail = false;
         break;
+
       case 'password':
         this.firstInputPassword = false;
         break;
+
       case 'passwordC':
         this.firstInputPasswordC = false;
         break;
+
+      case 'numero':
+        this.firstInputNumero = false;
+        break;
     }
+
+    this.atualizarFormulario();
   }
 
-  /* ===================================================== */
-
-  checkForm(): boolean {
-    const valid =
-      this.NameIsValid(this.nameField) &&
-      this.CPFIsValid(this.cpfField) &&
-      this.EmailIsValid(this.emailField) &&
-      this.PasswordIsValid(this.passwordField) &&
-      this.PasswordsAreValid();
-
-    this.buttonSubmit.disabled = !valid;
-    return valid == undefined ? false : valid;
+  onNameInput(): void {
+    this.firstInputName = false;
+    this.NameIsValid(this.nameField);
+    this.atualizarFormulario();
   }
 
-  /* Nome */
+  onCPFInput(): void {
+    this.firstInputCPF = false;
 
-  NameIsValid(name: string): boolean | undefined {
+    let value = this.cpfField.replace(/\D/g, '').slice(0, 11);
+
+    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+    value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+
+    this.cpfField = value;
+
+    this.CPFIsValid(this.cpfField);
+    this.atualizarFormulario();
+  }
+
+  onCNPJInput(): void {
+    this.firstInputCNPJ = false;
+
+    let value = this.cnpjField.replace(/\D/g, '').slice(0, 14);
+
+    value = value.replace(/^(\d{2})(\d)/, '$1.$2');
+    value = value.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
+    value = value.replace(/\.(\d{3})(\d)/, '.$1/$2');
+    value = value.replace(/(\d{4})(\d)/, '$1-$2');
+
+    this.cnpjField = value;
+
+    const cnpjValido = this.CNPJIsValid(this.cnpjField);
+
+    if (cnpjValido) {
+      this.buscarRazaoSocial();
+    }
+
+    this.atualizarFormulario();
+  }
+
+  onCEPInput(): void {
+    let value = this.cepField.replace(/\D/g, '').slice(0, 8);
+
+    this.cepField = value;
+    this.cepError = '';
+
+    this.atualizarFormulario();
+  }
+
+  onNumeroInput(): void {
+    this.firstInputNumero = false;
+
+    let value = this.numeroField.replace(/\D/g, '').slice(0, 10);
+
+    this.numeroField = value;
+
+    if (!value) {
+      this.numeroError = 'Número obrigatório.';
+    } else {
+      this.numeroError = '';
+    }
+
+    this.atualizarFormulario();
+  }
+
+  buscarCEP(): void {
+    const cep = this.cepField.replace(/\D/g, '');
+
+    if (!cep) {
+      this.cepError = 'CEP obrigatório.';
+      this.atualizarFormulario();
+      return;
+    }
+
+    if (cep.length !== 8) {
+      this.cepError = 'CEP deve conter 8 números.';
+      this.atualizarFormulario();
+      return;
+    }
+
+    this.cepError = '';
+
+    this.cepService.buscar(cep).subscribe({
+      next: (dados) => {
+        if (!dados.erro) {
+          this.logradouroField = dados.logradouro;
+          this.bairroField = dados.bairro;
+          this.localidadeField = dados.localidade;
+          this.ufField = dados.uf;
+        } else {
+          this.cepError = 'CEP não encontrado.';
+        }
+
+        this.atualizarFormulario();
+      },
+      error: () => {
+        this.cepError = 'Erro ao buscar CEP.';
+        this.atualizarFormulario();
+      },
+    });
+  }
+
+  buscarRazaoSocial(): void {
+    const cnpjLimpo = this.cnpjField.replace(/\D/g, '');
+
+    if (cnpjLimpo.length !== 14) {
+      return;
+    }
+
+    if (!this.cnpjService.validar(cnpjLimpo)) {
+      return;
+    }
+
+    if (this.ultimoCnpjBuscado === cnpjLimpo) {
+      return;
+    }
+
+    this.ultimoCnpjBuscado = cnpjLimpo;
+
+    this.cnpjService.buscarCNPJ(cnpjLimpo).subscribe({
+      next: (dados) => {
+        if (dados?.razao_social) {
+          this.nameField = dados.razao_social;
+          this.firstInputName = false;
+          this.NameIsValid(this.nameField);
+          this.atualizarFormulario();
+        }
+      },
+      error: () => {
+        this.cnpjError = 'CNPJ válido, mas não foi possível buscar a Razão Social.';
+        this.atualizarFormulario();
+      },
+    });
+  }
+
+  NameIsValid(name: string): boolean {
     if (this.firstInputName) {
-      this.alertName.style.display = 'none';
-      return;
-    }
-
-    if (name.replace(/\s+/g, '').length < 3) {
-      this.alertName.textContent = 'Nome inválido — mínimo 3 letras.';
-      this.alertName.style.display = 'block';
+      this.nameError = '';
       return false;
     }
 
-    this.alertName.style.display = 'none';
+    const nomeLimpo = name.trim().replace(/\s+/g, '');
+
+    if (nomeLimpo.length < 3) {
+      this.nameError =
+        this.tipoPessoa === 'PF' ? 'Nome inválido — mínimo 3 letras.' : 'Razão Social inválida.';
+      return false;
+    }
+
+    this.nameError = '';
     return true;
   }
 
-  /* ===================================================== */
-  /* CPF */
-
-  formatCPF(raw: string): string {
-    const nums = raw.replace(/\D/g, '').slice(0, 11);
-
-    if (nums.length <= 3) return nums;
-    if (nums.length <= 6) return nums.replace(/(\d{3})(\d+)/, '$1.$2');
-    if (nums.length <= 9) return nums.replace(/(\d{3})(\d{3})(\d+)/, '$1.$2.$3');
-
-    return nums.replace(/(\d{3})(\d{3})(\d{3})(\d+)/, '$1.$2.$3-$4');
-  }
-
-  CPFIsValid(cpfRef: string): boolean | undefined {
+  CPFIsValid(cpfRef: string): boolean {
     if (this.firstInputCPF) {
-      this.alertCPF.style.display = 'none';
-      return;
-    }
-
-    const cpf = cpfRef.replace(/\D/g, '');
-
-    if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {
-      this.alertCPF.textContent = 'CPF inválido.';
-      this.alertCPF.style.display = 'block';
+      this.cpfError = '';
       return false;
     }
 
-    let soma = 0;
+    const cpfLimpo = cpfRef.replace(/\D/g, '');
 
-    for (let i = 0; i < 9; i++) soma += Number(cpf[i]) * (10 - i);
-    let resto = (soma * 10) % 11;
-    if (resto >= 10) resto = 0;
-    if (resto !== Number(cpf[9])) {
-      this.alertCPF.textContent = 'CPF inválido.';
-      this.alertCPF.style.display = 'block';
+    if (!cpfLimpo) {
+      this.cpfError = 'CPF obrigatório.';
       return false;
     }
 
-    soma = 0;
-    for (let i = 0; i < 10; i++) soma += Number(cpf[i]) * (11 - i);
-    resto = (soma * 10) % 11;
-    if (resto >= 10) resto = 0;
-    if (resto !== Number(cpf[10])) {
-      this.alertCPF.textContent = 'CPF inválido.';
-      this.alertCPF.style.display = 'block';
+    if (!this.cpfService.validar(cpfLimpo)) {
+      this.cpfError = 'CPF inválido.';
       return false;
     }
 
-    this.alertCPF.style.display = 'none';
+    this.cpfError = '';
     return true;
   }
 
-  /* ===================================================== */
-  /* Email */
+  CNPJIsValid(cnpjRef: string): boolean {
+    if (this.firstInputCNPJ) {
+      this.cnpjError = '';
+      return false;
+    }
 
-  EmailIsValid(email: string): boolean | undefined {
+    const cnpjLimpo = cnpjRef.replace(/\D/g, '');
+
+    if (!cnpjLimpo) {
+      this.cnpjError = 'CNPJ obrigatório.';
+      return false;
+    }
+
+    if (!this.cnpjService.validar(cnpjLimpo)) {
+      this.cnpjError = 'CNPJ inválido.';
+      return false;
+    }
+
+    this.cnpjError = '';
+    return true;
+  }
+
+  EmailIsValid(email: string): boolean {
     if (this.firstInputEmail) {
-      this.alertEmail.style.display = 'none';
-      return;
+      this.emailError = '';
+      return false;
     }
 
     const rules = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    if (!rules.test(email)) {
-      this.alertEmail.textContent = 'E-mail inválido.';
-      this.alertEmail.style.display = 'block';
+    if (!email.trim()) {
+      this.emailError = 'E-mail obrigatório.';
       return false;
     }
 
-    this.alertEmail.style.display = 'none';
+    if (!rules.test(email)) {
+      this.emailError = 'E-mail inválido.';
+      return false;
+    }
+
+    this.emailError = '';
     return true;
   }
 
-  /* ===================================================== */
-  /* Senha */
+  PasswordIsValid(password: string): boolean {
+    this.firstInputPassword = false;
 
-  PasswordIsValid(password: string): boolean | undefined {
-    if (this.firstInputPassword) {
-      this.alertPassword.style.display = 'none';
-      return;
+    const rules = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9])\S{8,12}$/;
+
+    if (!password) {
+      this.passwordError = 'Senha obrigatória.';
+      this.atualizarFormulario();
+      return false;
     }
-
-    const rules = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&._-])[A-Za-z\d@$!%*?&._-]{8,}$/;
 
     if (!rules.test(password)) {
-      this.alertPassword.textContent =
-        'Senha inválida — mínimo 8 caracteres, com maiúscula, minúscula, número e símbolo.';
-      this.alertPassword.style.display = 'block';
+      this.passwordError =
+        'A senha deve ter entre 8 e 12 caracteres, com maiúscula, minúscula, número e símbolo.';
+      this.atualizarFormulario();
       return false;
     }
 
-    this.alertPassword.style.display = 'none';
-
+    this.passwordError = '';
     this.PasswordsAreValid();
-
+    this.atualizarFormulario();
     return true;
   }
 
-  /* ===================================================== */
-  /* Confirmar senha */
-
   PasswordsAreValid(): boolean {
-    const pass = this.passwordField;
-    const confirm = this.passwordConfirmationField;
+    this.firstInputPasswordC = false;
 
-    const match = pass === confirm;
-
-    if (!this.firstInputPasswordC) {
-      this.alertPasswordC.style.display = match ? 'none' : 'block';
-      if (!match) this.alertPasswordC.textContent = 'Senhas não coincidem.';
-    } else {
-      this.alertPasswordC.style.display = 'none';
+    if (!this.passwordConfirmationField) {
+      this.passwordErrorMessage = 'Confirme sua senha.';
+      this.atualizarFormulario();
+      return false;
     }
 
-    return match;
+    if (this.passwordField !== this.passwordConfirmationField) {
+      this.passwordErrorMessage = 'As senhas não coincidem.';
+      this.atualizarFormulario();
+      return false;
+    }
+
+    this.passwordErrorMessage = '';
+    this.atualizarFormulario();
+    return true;
   }
 
-  /* ===================================================== */
-  /* Toggle password visibility */
+  private documentoValido(): boolean {
+    if (this.tipoPessoa === 'PF') {
+      return this.cpfService.validar(this.cpfField.replace(/\D/g, ''));
+    }
+
+    return this.cnpjService.validar(this.cnpjField.replace(/\D/g, ''));
+  }
+
+  private nomeValido(): boolean {
+    return this.nameField.trim().replace(/\s+/g, '').length >= 3;
+  }
+
+  private emailValido(): boolean {
+    const rules = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return rules.test(this.emailField);
+  }
+
+  private senhaValida(): boolean {
+    const rules = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9])\S{8,12}$/;
+
+    return rules.test(this.passwordField);
+  }
+
+  private confirmacaoValida(): boolean {
+    return (
+      this.passwordConfirmationField.length > 0 &&
+      this.passwordField === this.passwordConfirmationField
+    );
+  }
+
+  private numeroValido(): boolean {
+    return this.numeroField.replace(/\D/g, '').length > 0;
+  }
+
+  private cepValido(): boolean {
+    return this.cepField.replace(/\D/g, '').length === 8;
+  }
+
+  atualizarFormulario(): void {
+    this.formValido =
+      this.nomeValido() &&
+      this.documentoValido() &&
+      this.emailValido() &&
+      this.senhaValida() &&
+      this.confirmacaoValida() &&
+      this.numeroValido() &&
+      this.cepValido();
+  }
+
+  focusNext(event: Event): void {
+    event.preventDefault();
+
+    const focusableElements = Array.from(
+      document.querySelectorAll('input, button, select, textarea'),
+    ).filter(
+      (el: any) => !el.disabled && el.tabIndex !== -1 && el.offsetParent !== null,
+    ) as HTMLElement[];
+
+    const currentIndex = focusableElements.indexOf(document.activeElement as HTMLElement);
+
+    if (currentIndex > -1 && currentIndex < focusableElements.length - 1) {
+      focusableElements[currentIndex + 1].focus();
+    }
+  }
 
   TogglePasswordVisibility(id: string, forceHide = false): void {
     const container = document.getElementById(`togglePasswordContainer${id}`);
     if (!container) return;
 
     const input = container.querySelector('input') as HTMLInputElement;
+    const showIcon = document.getElementById(`show-icon-${id}`);
+    const hideIcon = document.getElementById(`hide-icon-${id}`);
 
-    const showIcon = document.getElementById(`show-icon-${id}`)!;
-    const hideIcon = document.getElementById(`hide-icon-${id}`)!;
+    if (!input || !showIcon || !hideIcon) return;
 
     const showing = input.type === 'text';
 
@@ -269,38 +519,62 @@ export class Signin {
     }
   }
 
-  /* ===================================================== */
-
   TryRegisterUser(): void {
+    this.firstInputName = false;
+    this.firstInputEmail = false;
+    this.firstInputPassword = false;
+    this.firstInputPasswordC = false;
+    this.firstInputNumero = false;
+
+    if (this.tipoPessoa === 'PF') {
+      this.firstInputCPF = false;
+      this.CPFIsValid(this.cpfField);
+    } else {
+      this.firstInputCNPJ = false;
+      this.CNPJIsValid(this.cnpjField);
+    }
+
+    this.NameIsValid(this.nameField);
+    this.EmailIsValid(this.emailField);
+    this.PasswordIsValid(this.passwordField);
+    this.PasswordsAreValid();
+    this.onNumeroInput();
+    this.atualizarFormulario();
+
+    if (!this.formValido) {
+      return;
+    }
+
     const rawCPF = this.cpfField.replace(/\D/g, '');
+    const rawCNPJ = this.cnpjField.replace(/\D/g, '');
+    const documento = this.tipoPessoa === 'PF' ? rawCPF : rawCNPJ;
 
     this.userRegister.isEmailRegistered(this.emailField).subscribe((emailExists) => {
       if (emailExists) {
-        this.alertEmail.textContent = 'E-mail já cadastrado.';
-        this.alertEmail.style.display = 'block';
+        this.emailError = 'E-mail já cadastrado.';
+        return;
       }
 
-      this.userRegister.isCpfRegistered(rawCPF).subscribe((cpfExists) => {
-        if (cpfExists) {
-          this.alertCPF.textContent = 'CPF já cadastrado.';
-          this.alertCPF.style.display = 'block';
-        }
+      this.userRegister.isCpfRegistered(documento).subscribe((documentExists) => {
+        if (documentExists) {
+          if (this.tipoPessoa === 'PF') {
+            this.cpfError = 'CPF já cadastrado.';
+          } else {
+            this.cnpjError = 'CNPJ já cadastrado.';
+          }
 
-        if (emailExists || cpfExists) {
           return;
         }
 
-        // Se chegou até aqui, pode registrar
         const newUser: User = {
           name: this.nameField,
           email: this.emailField,
           password: this.passwordField,
-          cpf: rawCPF,
+          cpf: documento,
         };
 
         this.userRegister.registerUser(newUser).subscribe({
           next: () => {
-            console.log('Usuário registrado. -> ' + newUser.name);
             this.router.navigate(['/login']);
           },
           error: () => {

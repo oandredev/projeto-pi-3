@@ -9,12 +9,12 @@ import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-offer-details',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './offer-details.html',
   styleUrl: './offer-details.css',
 })
 export class OfferDetails implements OnInit {
-  /* Vars */
   offer: Offer | null = null;
 
   constructor(
@@ -25,39 +25,56 @@ export class OfferDetails implements OnInit {
     private cartService: CartService,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     const id = String(this.route.snapshot.paramMap.get('id'));
     this.loadOffer(id);
   }
 
-  loadOffer(id: string) {
+  loadOffer(id: string): void {
     this.offersService.getOfferData(id).subscribe((offer: Offer | null) => {
       this.offer = offer;
 
       if (!this.offer) {
-        this.forceRedirection();
+        alert('Oferta não encontrada.');
+        this.router.navigate(['/offers']);
       }
     });
   }
 
-  forceRedirection() {
-    alert('Algo falhou durante o carregamento. Voltando...');
-    this.router.navigate(['/offers']);
+  getPrice(): number {
+    if (!this.offer) return 0;
+
+    const offerAny = this.offer as any;
+
+    return Number(offerAny.priceBase ?? offerAny.price ?? 0);
   }
 
-  addToCart() {
+  addToCart(): void {
+    if (!this.offer) return;
+
     this.loginService
       .isLogged()
       .pipe(take(1))
       .subscribe((isLoggedIn) => {
-        // Sai silenciosamente se estiver deslogado.
         if (!isLoggedIn) {
-          alert('Você não está logado. Faça login para adicionar ao carrinho');
+          alert('Você precisa fazer login para adicionar ao carrinho.');
+          this.router.navigate(['/login']);
           return;
         }
-        this.cartService.addItem(this.offer!).subscribe(() => {
-          console.log('Item adicionado!');
+
+        this.cartService.addItem(this.offer!).subscribe({
+          next: () => {
+            alert('Jogo adicionado ao carrinho!');
+            this.router.navigate(['/cart']);
+          },
+          error: (err) => {
+            alert(err.message || 'Erro ao adicionar ao carrinho.');
+          },
         });
       });
+  }
+
+  goBack(): void {
+    this.router.navigate(['/offers']);
   }
 }

@@ -32,7 +32,7 @@ export class Offers {
     }
   }
 
-  goToDetails(offerId: number): void {
+  goToDetails(offerId: string): void { // coloquei como string para testar. Era number, mas o id no JSON é string
     this.router.navigate(['/offer-details', offerId]);
   }
 }

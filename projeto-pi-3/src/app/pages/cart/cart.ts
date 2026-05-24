@@ -85,7 +85,16 @@ export class CartView {
   removeItem(item: CartItem) {
     if (!this.cart || !this.cart.items) return;
 
+    const confirmDelete = confirm(
+      `Deseja realmente excluir o jogo "${item.offer.name}" do carrinho?`,
+    );
+
+    if (!confirmDelete) {
+      return;
+    }
+
     this.cart.items = this.cart.items.filter((i) => i !== item);
+
     this.updateTotals();
 
     this.cartService.removeCartItem(item.id!).subscribe();
@@ -95,16 +104,18 @@ export class CartView {
     // arrumar
   }
 
-  /*Gets*/
+  /*Gets
   getUnitValue(item: CartItem): number {
     return Number(item.subtotal) / Number(item.quantity);
   }
+  esse aqui eu tirei pq não tem mais como calcular o valor unitário, já que o subtotal é calculado com base na quantidade, então não tem como dividir pra pegar o valor unitário, a não ser que a gente mude a estrutura do carrinho pra ter o valor unitário separado do subtotal, mas por enquanto acho que não tem necessidade disso, então vou deixar só o subtotal mesmo
+  */
 
   getSubtotal(item: CartItem): number {
     return Number(item.subtotal);
   }
 
-  /* Validation */
+  /* Validação */
   isOrderValid(): boolean {
     const isCartNotEmpty = this.cart && this.cart.items && this.cart.items.length > 0;
     const isPaymentSelected = !!this.paymentMethod;

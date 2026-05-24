@@ -6,36 +6,25 @@
       <thead>
         <tr>
           <th>Item</th>
-          <th>Qtd</th>
-          <th>Valor Base</th>
-          <th>Subtotal</th>
+          <th>Licença</th>
+          <th>Valor</th>
           <th>Ações</th>
         </tr>
       </thead>
 
       <tbody>
         <tr *ngFor="let item of cart.items">
-          <!-- ITEM -->
           <td>
-            <strong>{{ item.offer?.name }}</strong>
-            <p>{{ getDescription(item) }}</p>
+            <strong>{{ item.offer.name }}</strong>
+            <!-- <p>{{ getDescription(item) }}</p>  o que eu poderia colocar aqui? -->
           </td>
 
-          <!-- QTD -->
           <td class="qtd-area">
-            <div class="qtd-area-inner">
-              <button class="qtd-btn minus" (click)="decreaseItem(item)">-</button>
-              <span>{{ item.quantity }}</span>
-
-              <button class="qtd-btn plus" (click)="increaseItem(item)">+</button>
-            </div>
+            <span class="digital-license">1 licença</span>
           </td>
 
-          <!-- VALUES -->
-          <td>R$ {{ getUnitValue(item) | number: '1.2-2' }}</td>
           <td>R$ {{ getSubtotal(item) | number: '1.2-2' }}</td>
 
-          <!-- DELETE ITEM -->
           <td>
             <button class="delete-btn" (click)="removeItem(item)">Excluir</button>
           </td>

@@ -9,14 +9,13 @@ export interface User {
 /*-----------------------------------------------------------------------------------*/
 
 export interface Offer {
-  // Game
   id: string;
   name: string;
-  priceBase: string;
-  description: string;
-  developer: string;
-  publisher: string;
-  images: string[]; // URLs
+  priceBase: number;
+  imageUrl: string;
+  description?: string;
+  developer?: string;
+  publisher?: string;
 }
 
 /*-----------------------------------------------------------------------------------*/

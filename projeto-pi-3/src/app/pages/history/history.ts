@@ -67,7 +67,7 @@ export class History {
   // Função para calcular o valor base + customizações de um item (para referência)
   calculateItemBaseValue(item: CartItem): number {
     // Usa a função auxiliar para garantir que o valor base é um número (usa optional chaining)
-    const base = this.getSafeValue(item.offer?.priceBase ?? null);
+    const base = this.getSafeValue(String(item.offer?.priceBase ?? '0'));
 
     return base;
   }

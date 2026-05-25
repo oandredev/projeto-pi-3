@@ -25,6 +25,7 @@ header {
   display: flex;
   align-items: center;
   text-decoration: none;
+  transition: all 0.25s ease;
 }
 
 .logo-area img {
@@ -33,15 +34,16 @@ header {
   height: auto;
   transform: none;
   filter: none;
-  transition: transform 0.25s ease, filter 0.25s ease;
+  transition: all 0.25s ease;
 }
 
-.logo-area img:hover {
+.logo-area:hover {
   transform: scale(1.05);
-  filter: drop-shadow(0 0 6px rgba(120, 80, 255, 0.5)) drop-shadow(0 0 10px rgba(102, 192, 244, 0.35));
+  filter: drop-shadow(0 0 6px rgba(120, 80, 255, 0.5))
+    drop-shadow(0 0 10px rgba(102, 192, 244, 0.35));
 }
 
-.logo-area img:active {
+.logo-area:active {
   transform: scale(0.95);
 }
 
@@ -50,8 +52,6 @@ header {
   font-size: 1.3em;
   color: #66c0f4;
   font-family: 'Orbitron', sans-serif;
-  /*font-family: 'Audiowide', cursive;*/
-  /*font-family: 'Rajdhani', sans-serif;*/
   text-shadow:
     0 0 5px rgba(102, 192, 244, 0.7),
     0 0 10px rgba(120, 80, 255, 0.5),
@@ -111,7 +111,9 @@ header {
 #cartH img {
   height: 24px;
   filter: brightness(0.8);
-  transition: transform 0.25s ease, filter 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    filter 0.25s ease;
 }
 
 #cartH:hover img {

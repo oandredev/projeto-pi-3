@@ -10,7 +10,7 @@ import { PaymentQRCode } from './pages/payment-qrcode/payment-qrcode';
 import { PurchaseConfirmation } from './pages/purchase-confirmation/purchase-confirmation';
 
 export const routes: Routes = [
-  { path: '', component: Offers, title: 'Ofertas' }, // Página inicial
+  { path: '', component: Offers, title: 'Ofertas' },
   { path: 'login', component: Login, title: 'Login' },
   { path: 'signin', component: Signin, title: 'Cadastrar' },
   { path: 'offers', component: Offers, title: 'Ofertas' },

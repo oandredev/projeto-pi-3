@@ -265,6 +265,66 @@
         "date": "25/05/2026, 20:27"
       },
       "status": "Finalizado"
+    },
+    {
+      "id": "a1da",
+      "idUser": "d8da",
+      "cart": {
+        "id": "3711",
+        "idUser": "d8da",
+        "items": [
+          {
+            "id": "aaf3df7d-0e7d-466d-a8be-30b79613ab82",
+            "idUser": "d8da",
+            "offer": {
+              "id": "3",
+              "name": "Jungle Ascendant",
+              "priceBase": 89.99,
+              "imageUrl": "images/primata.png",
+              "description": "Explore florestas densas e misteriosas habitadas por criaturas ancestrais. Descubra segredos perdidos nas profundezas da selva.",
+              "developer": "WildCraft Studios",
+              "publisher": "NaturePlay Publishing"
+            },
+            "quantity": "1",
+            "subtotal": "89.99"
+          }
+        ],
+        "valueTotal": "89.99",
+        "address": "",
+        "paymentMethod": "pix",
+        "date": "25/05/2026, 20:29"
+      },
+      "status": "Finalizado"
+    },
+    {
+      "id": "789b",
+      "idUser": "d8da",
+      "cart": {
+        "id": "3711",
+        "idUser": "d8da",
+        "items": [
+          {
+            "id": "b49cc381-f2cf-4ae5-b1f1-df951bc4b63b",
+            "idUser": "d8da",
+            "offer": {
+              "id": "9",
+              "name": "Pilot: Fire & Rescue",
+              "priceBase": 19.99,
+              "imageUrl": "images/pilot.png",
+              "description": "Pilote helicópteros de resgate em missões de alto risco. Salve vidas sob pressão extrema em cenários de desastre realistas.",
+              "developer": "AeroSim Labs",
+              "publisher": "RescuePlay Inc"
+            },
+            "quantity": "1",
+            "subtotal": "19.99"
+          }
+        ],
+        "valueTotal": "19.99",
+        "address": "",
+        "paymentMethod": "pix",
+        "date": "25/05/2026, 20:37"
+      },
+      "status": "Finalizado"
     }
   ]
 }

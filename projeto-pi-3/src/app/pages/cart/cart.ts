@@ -5,7 +5,6 @@ import { UserLoginService } from '../../core/services/userLogin/user-login';
 import { Cart, CartItem, History } from '../../core/types/types';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
@@ -26,7 +25,6 @@ export class CartView {
   constructor(
     private cartService: CartService,
     private historyService: HistoryService,
-    private http: HttpClient,
     private loginService: UserLoginService,
     private router: Router,
   ) {
@@ -46,42 +44,6 @@ export class CartView {
     });
   }
 
-  getDescription(item: CartItem): string {
-    return 'Algo sobre o item...'; // Implementar isso direito depois, talvez mostrar desenvolvedora e distribuidora ou algo do tipo
-  }
-
-  // Remover isso, talvez apenas opção de remover item do carrinho
-  /*Itens Qtd. interaction*/
-  increaseItem(item: CartItem) {
-    if (!this.cart || !this.cart.items) return;
-
-    const qty = Number(item.quantity) || 1;
-    item.quantity = String(qty + 1);
-
-    this.updateTotals();
-
-    this.cartService.updateCartItem(item).subscribe({
-      next: (updated) => console.log('Item atualizado no banco', updated),
-      error: (err) => console.error('Erro ao atualizar item', err),
-    });
-  }
-
-  decreaseItem(item: CartItem) {
-    if (!this.cart || !this.cart.items) return;
-
-    const qty = Number(item.quantity);
-
-    if (qty <= 1) {
-      this.removeItem(item);
-      return;
-    }
-
-    item.quantity = String(qty - 1);
-    this.updateTotals();
-
-    this.cartService.updateCartItem(item).subscribe();
-  }
-
   removeItem(item: CartItem) {
     if (!this.cart || !this.cart.items) return;
 
@@ -94,22 +56,8 @@ export class CartView {
     }
 
     this.cart.items = this.cart.items.filter((i) => i !== item);
-
-    this.updateTotals();
-
     this.cartService.removeCartItem(item.id!).subscribe();
   }
-
-  updateTotals() {
-    // arrumar
-  }
-
-  /*Gets
-  getUnitValue(item: CartItem): number {
-    return Number(item.subtotal) / Number(item.quantity);
-  }
-  esse aqui eu tirei pq não tem mais como calcular o valor unitário, já que o subtotal é calculado com base na quantidade, então não tem como dividir pra pegar o valor unitário, a não ser que a gente mude a estrutura do carrinho pra ter o valor unitário separado do subtotal, mas por enquanto acho que não tem necessidade disso, então vou deixar só o subtotal mesmo
-  */
 
   getSubtotal(item: CartItem): number {
     return Number(item.subtotal);
@@ -124,7 +72,7 @@ export class CartView {
       return false;
     }
 
-    if (this.paymentMethod === 'Cartão de Crédito') {
+    if (this.paymentMethod === 'credito') {
       return this.installments > 0;
     }
 
@@ -138,7 +86,8 @@ export class CartView {
     }
 
     if (this.cart) {
-      this.cart.paymentMethod = undefined; // ARRUMAR ------------------------------------------------------------------
+      this.cart.paymentMethod = (this.paymentMethod as Cart['paymentMethod']) || '';
+      // ------------------------------------------------------------------
 
       const dateFormated = new Intl.DateTimeFormat('pt-BR', {
         dateStyle: 'short',
@@ -151,7 +100,7 @@ export class CartView {
     const newHistory: History = {
       idUser: String(this.loggedUserId),
       cart: this.cart!,
-      status: 'Finalizado', // Deixar vazio por enquanto, depois implementar lógica pra definir isso direito
+      status: 'Finalizado',
     };
 
     this.historyService.saveHistory(newHistory).subscribe({

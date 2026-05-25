@@ -22,75 +22,249 @@
     {
       "id": "1",
       "name": "SkyFire Ascendant",
-      "price": 59.9,
-      "imageUrl": "images/skyfire.png"
+      "priceBase": 59.9,
+      "imageUrl": "images/skyfire.png",
+      "description": "Embarque em uma jornada épica pelos céus em chamas. Domine habilidades elementais e enfrente inimigos lendários em batalhas aéreas intensas.",
+      "developer": "Ember Studios",
+      "publisher": "Horizon Games"
     },
     {
       "id": "2",
       "name": "Apocalypse",
-      "price": 79.99,
-      "imageUrl": "images/zombie.png"
+      "priceBase": 79.99,
+      "imageUrl": "images/zombie.png",
+      "description": "Sobreviva ao colapso da civilização em um mundo dominado por hordas de mortos-vivos. Cada decisão pode ser a última.",
+      "developer": "DarkForge Interactive",
+      "publisher": "DarkForge Interactive"
     },
     {
       "id": "3",
       "name": "Jungle Ascendant",
-      "price": 89.99,
-      "imageUrl": "images/primata.png"
+      "priceBase": 89.99,
+      "imageUrl": "images/primata.png",
+      "description": "Explore florestas densas e misteriosas habitadas por criaturas ancestrais. Descubra segredos perdidos nas profundezas da selva.",
+      "developer": "WildCraft Studios",
+      "publisher": "NaturePlay Publishing"
     },
     {
       "id": "4",
       "name": "Skyline Strike",
-      "price": 39.9,
-      "imageUrl": "images/skyLine.png"
+      "priceBase": 39.9,
+      "imageUrl": "images/skyLine.png",
+      "description": "Combates frenéticos nos telhados de uma metrópole futurista. Reflexos rápidos e estratégia são sua única chance de sobrevivência.",
+      "developer": "UrbanEdge Games",
+      "publisher": "UrbanEdge Games"
     },
     {
       "id": "5",
-      "name": "Prehistoric ",
-      "price": 149.9,
-      "imageUrl": "images/dino.png"
+      "name": "Prehistoric",
+      "priceBase": 149.9,
+      "imageUrl": "images/dino.png",
+      "description": "Retorne a uma era esquecida e enfrente dinossauros colossal em ambientes abertos e perigosos. A extinção está em suas mãos.",
+      "developer": "AncientWorld Dev",
+      "publisher": "Epoch Entertainment"
     },
     {
       "id": "6",
       "name": "Street Strike",
-      "price": 120,
-      "imageUrl": "images/streetCar.png"
+      "priceBase": 120,
+      "imageUrl": "images/streetCar.png",
+      "description": "Corridas ilegais nas ruas da cidade com adrenalina total. Customize seu carro e domine cada pista antes do amanhecer.",
+      "developer": "NitroLab Studios",
+      "publisher": "Asphalt Publishing"
     },
     {
       "id": "7",
       "name": "Combat: Shadow Arenas",
-      "price": 110.5,
-      "imageUrl": "images/combat.png"
+      "priceBase": 110.5,
+      "imageUrl": "images/combat.png",
+      "description": "Arenas sombrias, guerreiros implacáveis e combates brutais. Prove seu valor nas arenas mais perigosas do mundo subterrâneo.",
+      "developer": "ShadowPit Games",
+      "publisher": "Iron Fist Publishing"
     },
     {
       "id": "8",
-      "name": "Floria",
-      "price": 45,
-      "imageUrl": "images/floria.png"
+      "name": "Eloria",
+      "priceBase": 45,
+      "imageUrl": "images/floria.png",
+      "description": "Um RPG encantador ambientado em um reino mágico repleto de fadas, elfos e criaturas místicas. Uma aventura para todas as idades.",
+      "developer": "Dreamweave Studios",
+      "publisher": "Fable Works"
     },
     {
       "id": "9",
       "name": "Pilot: Fire & Rescue",
-      "price": 19.99,
-      "imageUrl": "images/pilot.png"
+      "priceBase": 19.99,
+      "imageUrl": "images/pilot.png",
+      "description": "Pilote helicópteros de resgate em missões de alto risco. Salve vidas sob pressão extrema em cenários de desastre realistas.",
+      "developer": "AeroSim Labs",
+      "publisher": "RescuePlay Inc"
     },
     {
       "id": "10",
-      "name": "Super Cogumelo",
-      "price": 34.9,
-      "imageUrl": "images/super.png"
+      "name": "Strike Protocol",
+      "priceBase": 95,
+      "imageUrl": "images/aviation2.png",
+      "description": "Operações táticas de elite em zonas de conflito ao redor do mundo. Planejamento preciso e execução perfeita são a missão.",
+      "developer": "TacForce Digital",
+      "publisher": "Warfront Publishing"
     },
     {
       "id": "11",
-      "name": "Strike Protocol",
-      "price": 95,
-      "imageUrl": "images/aviation2.png"
-    },
-    {
-      "id": "12",
       "name": "Grand GP: Nitro",
-      "price": 29.99,
-      "imageUrl": "images/grandGP.png"
+      "priceBase": 29.99,
+      "imageUrl": "images/grandGP.png",
+      "description": "A experiência definitiva da MotoGP com física realista, estratégias de pit stop e campeonatos globais emocionantes.",
+      "developer": "PolePosition Studios",
+      "publisher": "Grand Prix Media"
     }
   ],
-  "cart": []
+  "cart": [
+    {
+      "id": "3711",
+      "idUser": "d8da",
+      "items": [],
+      "valueTotal": "0.00",
+      "address": "",
+      "paymentMethod": "",
+      "date": ""
+    }
+  ],
+  "history": [
+    {
+      "id": "3f57",
+      "idUser": "d8da",
+      "cart": {
+        "id": "3711",
+        "idUser": "d8da",
+        "items": [
+          {
+            "id": "81a80b49-c0f3-47e4-a145-61a8e278ddfc",
+            "idUser": "d8da",
+            "offer": {
+              "id": "2",
+              "name": "Apocalypse",
+              "priceBase": 79.99,
+              "imageUrl": "images/zombie.png",
+              "description": "Sobreviva ao colapso da civilização em um mundo dominado por hordas de mortos-vivos. Cada decisão pode ser a última.",
+              "developer": "DarkForge Interactive",
+              "publisher": "DarkForge Interactive"
+            },
+            "quantity": "1",
+            "subtotal": "79.99"
+          }
+        ],
+        "valueTotal": "79.99",
+        "address": "",
+        "paymentMethod": "credito",
+        "date": "25/05/2026, 20:16"
+      },
+      "status": "Finalizado"
+    },
+    {
+      "id": "fbcc",
+      "idUser": "d8da",
+      "cart": {
+        "id": "3711",
+        "idUser": "d8da",
+        "items": [
+          {
+            "id": "3d7daab3-fa27-4963-b621-a4ba1733cebd",
+            "idUser": "d8da",
+            "offer": {
+              "id": "4",
+              "name": "Skyline Strike",
+              "priceBase": 39.9,
+              "imageUrl": "images/skyLine.png",
+              "description": "Combates frenéticos nos telhados de uma metrópole futurista. Reflexos rápidos e estratégia são sua única chance de sobrevivência.",
+              "developer": "UrbanEdge Games",
+              "publisher": "UrbanEdge Games"
+            },
+            "quantity": "1",
+            "subtotal": "39.90"
+          }
+        ],
+        "valueTotal": "39.90",
+        "address": "",
+        "paymentMethod": "debito",
+        "date": "25/05/2026, 20:18"
+      },
+      "status": "Finalizado"
+    },
+    {
+      "id": "1eb9",
+      "idUser": "d8da",
+      "cart": {
+        "id": "3711",
+        "idUser": "d8da",
+        "items": [
+          {
+            "id": "ce096322-7857-4b7c-a296-43cb2f150205",
+            "idUser": "d8da",
+            "offer": {
+              "id": "1",
+              "name": "SkyFire Ascendant",
+              "priceBase": 59.9,
+              "imageUrl": "images/skyfire.png",
+              "description": "Embarque em uma jornada épica pelos céus em chamas. Domine habilidades elementais e enfrente inimigos lendários em batalhas aéreas intensas.",
+              "developer": "Ember Studios",
+              "publisher": "Horizon Games"
+            },
+            "quantity": "1",
+            "subtotal": "59.90"
+          }
+        ],
+        "valueTotal": "59.90",
+        "address": "",
+        "paymentMethod": "pix",
+        "date": "25/05/2026, 20:20"
+      },
+      "status": "Finalizado"
+    },
+    {
+      "id": "131b",
+      "idUser": "d8da",
+      "cart": {
+        "id": "3711",
+        "idUser": "d8da",
+        "items": [
+          {
+            "id": "d4572854-c9a1-45f1-bf6e-64297fbe3e9c",
+            "idUser": "d8da",
+            "offer": {
+              "id": "6",
+              "name": "Street Strike",
+              "priceBase": 120,
+              "imageUrl": "images/streetCar.png",
+              "description": "Corridas ilegais nas ruas da cidade com adrenalina total. Customize seu carro e domine cada pista antes do amanhecer.",
+              "developer": "NitroLab Studios",
+              "publisher": "Asphalt Publishing"
+            },
+            "quantity": "1",
+            "subtotal": "120.00"
+          },
+          {
+            "id": "b6878cd5-7f97-48a0-a19f-b632c1091d25",
+            "idUser": "d8da",
+            "offer": {
+              "id": "10",
+              "name": "Strike Protocol",
+              "priceBase": 95,
+              "imageUrl": "images/aviation2.png",
+              "description": "Operações táticas de elite em zonas de conflito ao redor do mundo. Planejamento preciso e execução perfeita são a missão.",
+              "developer": "TacForce Digital",
+              "publisher": "Warfront Publishing"
+            },
+            "quantity": "1",
+            "subtotal": "95.00"
+          }
+        ],
+        "valueTotal": "215.00",
+        "address": "",
+        "paymentMethod": "pix",
+        "date": "25/05/2026, 20:27"
+      },
+      "status": "Finalizado"
+    }
+  ]
 }

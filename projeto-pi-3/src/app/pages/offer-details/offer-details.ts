@@ -16,6 +16,7 @@ import { take } from 'rxjs/operators';
 })
 export class OfferDetails implements OnInit {
   offer: Offer | null = null;
+  alreadyBought = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,16 +38,23 @@ export class OfferDetails implements OnInit {
       if (!this.offer) {
         alert('Oferta não encontrada.');
         this.router.navigate(['/offers']);
+        return;
       }
+
+      this.loginService
+        .getLoggedUser()
+        .pipe(take(1))
+        .subscribe((user) => {
+          if (!user?.id) return;
+
+          this.cartService
+            .userAlreadyBoughtGame(user.id, id)
+            .pipe(take(1))
+            .subscribe((bought) => {
+              this.alreadyBought = bought;
+            });
+        });
     });
-  }
-
-  getPrice(): number {
-    if (!this.offer) return 0;
-
-    const offerAny = this.offer as any;
-
-    return Number(offerAny.priceBase ?? offerAny.price ?? 0);
   }
 
   addToCart(): void {

@@ -32,10 +32,9 @@ export interface Cart {
   id?: string;
   idUser: string;
   items?: CartItem[];
-  valueTotal?: string;
-  address?: string;
-  date?: string;
-  paymentMethod?: 'Cartão de Crédito' | 'Cartão de Débito' | 'Pix' | '';
+  valueTotal: string;
+  date: string;
+  paymentMethod: 'credito' | 'debito' | 'pix' | '';
 }
 
 /*-----------------------------------------------------------------------------------*/

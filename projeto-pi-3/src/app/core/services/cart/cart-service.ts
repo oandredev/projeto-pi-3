@@ -47,7 +47,7 @@ export class CartService {
     );
   }
 
-  private userAlreadyBoughtGame(idUser: string, offerId: string): Observable<boolean> {
+  userAlreadyBoughtGame(idUser: string, offerId: string): Observable<boolean> {
     return this.http.get<History[]>(`${this.historyAPI}?idUser=${idUser}`).pipe(
       map((historyList) => {
         return historyList.some((history) =>
@@ -101,7 +101,6 @@ export class CartService {
       idUser,
       items: [],
       valueTotal: '0.00',
-      address: '',
       paymentMethod: '',
       date: '',
     };

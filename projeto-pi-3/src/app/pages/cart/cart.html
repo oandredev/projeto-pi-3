@@ -16,7 +16,7 @@
         <tr *ngFor="let item of cart.items">
           <td>
             <strong>{{ item.offer.name }}</strong>
-            <!-- <p>{{ getDescription(item) }}</p>  o que eu poderia colocar aqui? -->
+            <p>DESCRIÇÃO: {{ item.offer.description }}</p>
           </td>
 
           <td class="qtd-area">

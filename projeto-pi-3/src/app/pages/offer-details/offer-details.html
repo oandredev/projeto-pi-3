@@ -9,25 +9,30 @@
     <h1>{{ offer.name }}</h1>
 
     <p class="game-description">
-      SkyFire Ascendant coloca você no comando de batalhas aéreas futuristas em alta velocidade.
-      Enfrente inimigos em cenários tecnológicos, desbloqueie novas aeronaves e domine os céus em
-      combates intensos além das fronteiras.
+      {{
+        offer.description ||
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+      }}
     </p>
 
     <div class="game-details-box">
-      <p><strong>Desenvolvedora:</strong> A&F Studios</p>
-      <p><strong>Distribuidora:</strong> A&F Games</p>
+      <p><strong>Desenvolvedora:</strong> {{ offer.developer }}</p>
+      <p><strong>Distribuidora:</strong> {{ offer.publisher }}</p>
       <p><strong>Categoria:</strong> Ação / Combate Aéreo</p>
     </div>
 
-    <p class="game-price">R$ {{ getPrice() | number: '1.2-2' }}</p>
+    <p class="game-price">R$ {{ offer.priceBase | number: '1.2-2' }}</p>
+    <p *ngIf="alreadyBought">✓ Você já possui este jogo</p>
 
-    <button type="button" id="addToCart" (click)="addToCart()">
+    <button
+      type="button"
+      id="addToCart"
+      (click)="addToCart()"
+      [disabled]="alreadyBought"
+      *ngIf="!alreadyBought"
+    >
       Adicionar ao Carrinho
     </button>
-
-    <button type="button" class="backButton" (click)="goBack()">
-      Voltar para ofertas
-    </button>
+    <button type="button" class="backButton" (click)="goBack()">Voltar para ofertas</button>
   </div>
 </section>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserLoginService } from '../../core/services/userLogin/user-login';
 import { User } from '../../core/types/types';
 import { FormsModule } from '@angular/forms';
@@ -10,13 +10,25 @@ import { Router, RouterModule } from '@angular/router';
   styleUrl: './login.css',
   imports: [RouterModule, FormsModule],
 })
-export class Login {
+export class Login implements OnInit {
   emailField = '';
   passwordField = '';
   passwordVisible = false;
   errorMessage = '';
 
-  constructor(private loginService: UserLoginService, private router: Router) {}
+  constructor(
+    private loginService: UserLoginService,
+    private router: Router,
+  ) {}
+
+  ngOnInit() {
+    setTimeout(() => {
+      if (this.loginService.getLoggedUser()) {
+        alert('Você já está logado!. Redirecionando para as ofertas...');
+        this.router.navigate(['/offers']);
+      }
+    });
+  }
 
   TogglePasswordVisibility(forceHide: boolean = false) {
     this.passwordVisible = forceHide ? false : !this.passwordVisible;

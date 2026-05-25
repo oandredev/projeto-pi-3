@@ -1,38 +1,35 @@
 <footer class="footer">
   <div class="footer-container">
-    <!-- LINHA 1 -->
     <div class="footer-top">
-      <img src="images/logo_perfeito.png" class="footer-logo" />
-
+      <a routerLink="/" class="footer-logo-link">
+        <img src="images/logo_perfeito.png" class="footer-logo" />
+      </a>
       <p>
         © 2026 A&F Games.<br />
         Todos os direitos reservados aos sócios da A&F Games.<br />
         Todas as marcas são propriedade de seus respectivos donos.
       </p>
     </div>
-
     <hr />
-
-    <!-- LINHA 2 / LINKS -->
     <div class="footer-links">
       <div class="footer-column">
         <h4>Empresa</h4>
-        <a href="about-us">Sobre nós</a>
-        <a href="offers">Ofertas</a>
-        <a href="shopping-cart">Seu carrinho</a>
+        <a routerLink="/offers">Ofertas</a>
+        <a routerLink="/about-us">Sobre nós</a>
       </div>
 
       <div class="footer-column">
         <h4>Minha Conta</h4>
-        <a href="#">Baixe o A&F</a>
-        <a href="signin">Crie seu login</a>
-        <a href="login">Acesse seu login</a>
+        <a routerLink="/signin">Criar conta</a>
+        <a routerLink="/login">Entrar</a>
+        <a routerLink="/cart">Carrinho</a>
       </div>
 
       <div class="footer-column">
         <h4>Parceiros</h4>
         <a target="_blank" href="https://www.sp.senac.br/">Senac</a>
-        <a href="#">Desenvolvedores</a>
+        <a routerLink="#">Desenvolvedores</a>
+        <a href="https://github.com/oandredev/projeto-pi-3" target="_blank">Baixe o A&F</a>
       </div>
     </div>
   </div>

@@ -1,6 +1,5 @@
 .footer {
   background-color: #171a27;
-  /* cor principal Steam */
   color: #c6d4df;
   padding: 30px 15%;
   font-size: 14px;
@@ -12,7 +11,6 @@
   gap: 20px;
 }
 
-/* Topo */
 .footer-top {
   display: flex;
   align-items: center;
@@ -29,7 +27,9 @@
   height: auto;
   transform: none;
   filter: none;
-  transition: transform 0.25s ease, filter 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    filter 0.25s ease;
 }
 
 .footer-logo:active,
@@ -40,15 +40,12 @@
 .footer-logo:hover,
 .logo-area img:hover {
   transform: scale(1.05);
-filter: drop-shadow(0 0 6px rgba(120, 80, 255, 0.5)) drop-shadow(0 0 10px rgba(102, 192, 244, 0.35));
+  filter: drop-shadow(0 0 6px rgba(120, 80, 255, 0.5))
+    drop-shadow(0 0 10px rgba(102, 192, 244, 0.35));
 }
 .footer-logo:active {
   transform: scale(0.95);
 }
-
-
-
-
 
 /* Linha separadora */
 .footer hr {

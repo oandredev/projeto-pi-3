@@ -1,52 +1,97 @@
 .purchase-confirmation {
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 2rem;
+  min-height: 80vh;
 }
 
 .confirmation-box {
-  padding: 2rem 3rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 2.5rem;
+  border-radius: 24px;
+  max-width: 480px;
+  width: 100%;
   text-align: center;
-  border-top: 0.2rem solid #004f26;
-  border-bottom: 5px solid #ce2b37;
+  background:
+    radial-gradient(circle at top left, rgba(123, 44, 191, 0.16), transparent 35%),
+    linear-gradient(to bottom, #111827, #0f172a);
+  border: 1px solid rgba(157, 78, 221, 0.18);
+  box-shadow: 0 0 35px rgba(0, 0, 0, 0.55);
+  gap: 1rem;
 }
 
 .confirmation-box h1 {
-  color: #004f26;
-  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 0;
+  background: linear-gradient(to right, #ffffff, #d8b4fe, #66c0f4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px rgba(157, 78, 221, 0.3);
 }
 
 .confirmation-box p {
-  margin-bottom: 2rem;
+  margin: 0;
+  color: #94a3b8;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
-/* ---------------------- */
+.confirmation-box p:first-of-type {
+  color: #e5e7eb;
+  font-size: 1.05rem;
+}
+
+.btn-group {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
 .btn,
 .btn:link,
 .btn:visited {
-  background: #004f26;
+  display: inline-block;
+  padding: 0.9rem 1.75rem;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(to right, #7b2cbf, #9d4edd);
   color: #fff;
   font-weight: bold;
-  margin: 0.5rem 1rem;
-  padding: 1rem 1.5rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  opacity: 1;
-  transform: scale(0.98);
-  transition: 0.3s ease;
+  font-size: 1rem;
   text-decoration: none;
-  display: inline-block;
+  cursor: pointer;
+  transition: 0.25s ease;
+  box-shadow: 0 0 20px rgba(123, 44, 191, 0.35);
 }
 
 .btn:hover {
-  background: rgb(1, 99, 48);
-  transform: scale(1);
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(157, 78, 221, 0.5);
 }
 
 .btn:active {
-  transform: scale(0.96);
+  transform: scale(0.98);
+}
+
+@media (max-width: 950px) {
+  .confirmation-box {
+    padding: 1.5rem 1.25rem;
+    margin: 0 1rem;
+  }
+
+  .btn-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
 }

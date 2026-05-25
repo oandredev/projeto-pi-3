@@ -3,62 +3,79 @@
   justify-content: center;
   align-items: center;
   padding: 2rem;
-  flex-direction: column;
+  min-height: 80vh;
 }
 
 .confirmation-box {
   display: flex;
   flex-direction: column;
-  padding: 2rem 3rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  max-width: 500px;
+  align-items: center;
+  padding: 2rem 2.5rem;
+  border-radius: 24px;
+  max-width: 480px;
+  width: 100%;
   text-align: center;
-  border-top: 0.2rem solid #004f26;
-  border-bottom: 5px solid #ce2b37;
+  background:
+    radial-gradient(circle at top right, rgba(102, 192, 244, 0.14), transparent 35%),
+    linear-gradient(to bottom, #111827, #0f172a);
+  border: 1px solid rgba(102, 192, 244, 0.2);
+  box-shadow: 0 0 35px rgba(0, 0, 0, 0.55);
+  gap: 1.25rem;
 }
 
 .confirmation-box h1 {
-  color: #004f26;
+  font-size: 1.25rem;
+  font-weight: bold;
+  line-height: 1.5;
+  background: linear-gradient(to right, #ffffff, #d8b4fe, #66c0f4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px rgba(157, 78, 221, 0.3);
+  margin: 0;
 }
 
-.confirmation-box p {
-  margin-bottom: 2rem;
+#fakeQRCode {
+  width: 55%;
+  display: block;
+  margin: 0 auto;
+  border: 2px solid rgba(157, 78, 221, 0.5);
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(157, 78, 221, 0.2);
 }
 
-/* ---------------------- */
 .btn,
 .btn:link,
 .btn:visited {
-  background: #004f26;
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(to right, #7b2cbf, #9d4edd);
   color: #fff;
   font-weight: bold;
-  margin: 0.5rem 1rem;
-  padding: 1rem 1.5rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  opacity: 1;
-  transform: scale(0.98);
-  transition: 0.3s ease;
+  font-size: 1rem;
   text-decoration: none;
-  display: inline-block;
+  cursor: pointer;
+  transition: 0.25s ease;
+  box-shadow: 0 0 20px rgba(123, 44, 191, 0.35);
 }
 
 .btn:hover {
-  background: rgb(1, 99, 48);
-  transform: scale(1);
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(157, 78, 221, 0.5);
 }
 
 .btn:active {
-  transform: scale(0.96);
+  transform: scale(0.98);
 }
 
-/* QR Code */
-#fakeQRCode {
-  width: 50%;
-  margin: 1rem auto;
-  display: block;
-  border: solid 3px #004f26;
-  border-radius: 6px;
+@media (max-width: 950px) {
+  .confirmation-box {
+    padding: 1.5rem 1.25rem;
+    margin: 0 1rem;
+  }
+
+  #fakeQRCode {
+    width: 70%;
+  }
 }

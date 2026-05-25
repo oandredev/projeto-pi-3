@@ -27,7 +27,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: .75rem 0;
+  padding: 0.75rem 0;
 }
 
 #login h1 {
@@ -42,7 +42,7 @@
 
 #login p {
   color: #b8c1d1;
-  margin: .7rem 0;
+  margin: 0.7rem 0;
 }
 
 #login hr {
@@ -51,7 +51,7 @@
   border: none;
   border-radius: 999px;
   background: linear-gradient(to right, #7b2cbf, #66c0f4);
-  margin-top: .7rem;
+  margin-top: 0.7rem;
 }
 
 #formsLogin {
@@ -62,26 +62,26 @@
 
 #login label {
   text-align: left;
-  margin: 1rem 0 .35rem 0;
+  margin: 1rem 0 0.35rem 0;
   font-weight: 600;
   color: #ffffff;
-  font-size: .95rem;
+  font-size: 0.95rem;
 }
 
 #login input {
   width: 100%;
-  padding: .95rem 1rem;
+  padding: 0.95rem 1rem;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, .08);
-  background: rgba(255, 255, 255, .04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
   color: #ffffff;
-  font-size: .95rem;
+  font-size: 0.95rem;
   box-sizing: border-box;
   transition:
-    border .3s ease,
-    background .3s ease,
-    box-shadow .3s ease,
-    transform .2s ease;
+    border 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.2s ease;
 }
 
 #login input::placeholder {
@@ -89,14 +89,14 @@
 }
 
 #login input:hover {
-  border-color: rgba(157, 78, 221, .45);
+  border-color: rgba(157, 78, 221, 0.45);
 }
 
 #login input:focus {
   outline: none;
   border-color: #9d4edd;
-  background: rgba(255, 255, 255, .06);
-  box-shadow: 0 0 15px rgba(157, 78, 221, .25);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 15px rgba(157, 78, 221, 0.25);
 }
 
 #formsLogin button[type='submit'] {
@@ -109,24 +109,24 @@
   font-weight: bold;
   color: #ffffff;
   background: linear-gradient(to right, #7b2cbf, #9d4edd);
-  box-shadow: 0 0 20px rgba(123, 44, 191, .35);
+  box-shadow: 0 0 20px rgba(123, 44, 191, 0.35);
   transition:
-    transform .25s ease,
-    box-shadow .25s ease,
-    opacity .25s ease;
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    opacity 0.25s ease;
 }
 
 #formsLogin button[type='submit']:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 30px rgba(157, 78, 221, .5);
+  box-shadow: 0 0 30px rgba(157, 78, 221, 0.5);
 }
 
 #formsLogin button[type='submit']:active {
-  transform: scale(.98);
+  transform: scale(0.98);
 }
 
 #formsLogin:invalid button[type='submit'] {
-  opacity: .5;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
@@ -136,7 +136,7 @@
   justify-content: space-between;
   margin-top: 1rem;
   padding: 0 4px;
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 #preferences a,
@@ -145,20 +145,20 @@
   text-decoration: none;
   font-weight: 600;
   transition:
-    color .2s ease,
-    text-shadow .2s ease;
+    color 0.2s ease,
+    text-shadow 0.2s ease;
 }
 
 #preferences a:hover,
 #signinRedirect a:hover {
   color: #9d4edd;
-  text-shadow: 0 0 10px rgba(157, 78, 221, .5);
+  text-shadow: 0 0 10px rgba(157, 78, 221, 0.5);
 }
 
 #preferences .remember {
   display: flex;
   align-items: center;
-  gap: .5rem;
+  gap: 0.5rem;
   color: #d6d6d6;
 }
 
@@ -201,10 +201,10 @@ p#signinRedirect {
 .togglePasswordVisibility img {
   width: 22px;
   height: 22px;
-  opacity: .7;
+  opacity: 0.7;
   transition:
-    opacity .2s ease,
-    transform .2s ease;
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
 .togglePasswordVisibility:hover img {
@@ -212,8 +212,16 @@ p#signinRedirect {
   transform: scale(1.1);
 }
 
-@media (max-width:768px) {
+.inputError {
+  color: #ff4d6d;
+  font-size: 0.8rem;
+  margin-top: 4px;
+  min-height: 18px;
+  text-align: center;
+  display: block;
+}
 
+@media (max-width: 768px) {
   #login {
     padding: 2rem;
     border-radius: 18px;
@@ -222,5 +230,4 @@ p#signinRedirect {
   #login h1 {
     font-size: 2.2rem;
   }
-
 }

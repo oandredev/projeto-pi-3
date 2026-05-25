@@ -24,7 +24,7 @@ export class Login implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       if (this.loginService.getLoggedUser()) {
-        alert('Você já está logado!. Redirecionando para as ofertas...');
+        alert('Você já está logado! Redirecionando para as ofertas...');
         this.router.navigate(['/offers']);
       }
     });

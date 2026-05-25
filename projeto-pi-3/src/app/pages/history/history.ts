@@ -84,4 +84,13 @@ export class History {
         return method?.toUpperCase() ?? '';
     }
   }
+
+  getStatusClass(status: string): string {
+    const map: Record<string, string> = {
+      'Aguardando pagamento': 'pendente',
+      Finalizado: 'aprovado',
+      Cancelado: 'cancelado',
+    };
+    return map[status] ?? 'pendente';
+  }
 }

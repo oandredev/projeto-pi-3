@@ -35,7 +35,7 @@ export interface Cart {
   valueTotal?: string;
   address?: string;
   date?: string;
-  paymentMethod?: 'Cartão de Crédito' | 'Cartão de Débito' | 'Boleto' | 'Pix' | '';
+  paymentMethod?: 'Cartão de Crédito' | 'Cartão de Débito' | 'Pix' | '';
 }
 
 /*-----------------------------------------------------------------------------------*/

@@ -1,0 +1,109 @@
+#aboutPage {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  width: min(100%, 1300px);
+  margin: 2rem auto;
+  padding: 1rem;
+  color: #fff;
+}
+
+.about-area {
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at top left, rgba(123, 44, 191, 0.16), transparent 35%),
+    linear-gradient(to bottom, #111827, #0f172a);
+  border: 1px solid rgba(157, 78, 221, 0.18);
+  box-shadow: 0 0 35px rgba(0, 0, 0, 0.55);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.about-area h1 {
+  margin-bottom: 0.5rem;
+  font-size: 2.2rem;
+  text-align: center;
+  background: linear-gradient(to right, #ffffff, #d8b4fe, #66c0f4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px rgba(157, 78, 221, 0.3);
+}
+
+.team-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.dev-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem 1.5rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(157, 78, 221, 0.18);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.35);
+  text-decoration: none;
+  width: 220px;
+  transition: 0.25s ease;
+}
+
+.dev-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(157, 78, 221, 0.5);
+  box-shadow: 0 0 35px rgba(157, 78, 221, 0.2);
+}
+
+.avatar-wrapper {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #9d4edd;
+  box-shadow: 0 0 20px rgba(157, 78, 221, 0.4);
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.dev-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.dev-name {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.dev-role {
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+.dev-github {
+  font-size: 0.82rem;
+  color: #66c0f4;
+  margin-top: 0.2rem;
+}
+
+@media (max-width: 700px) {
+  .team-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+}

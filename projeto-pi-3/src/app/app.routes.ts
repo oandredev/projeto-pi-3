@@ -8,6 +8,7 @@ import { AboutUs } from './pages/about-us/about-us';
 import { CartView } from './pages/cart/cart';
 import { PaymentQRCode } from './pages/payment-qrcode/payment-qrcode';
 import { PurchaseConfirmation } from './pages/purchase-confirmation/purchase-confirmation';
+import { Library } from './pages/library/library';
 
 export const routes: Routes = [
   { path: '', component: Offers, title: 'Ofertas' },
@@ -16,6 +17,7 @@ export const routes: Routes = [
   { path: 'offers', component: Offers, title: 'Ofertas' },
   { path: 'offer-details/:id', component: OfferDetails, title: 'Detalhes da Oferta' },
   { path: 'history', component: History, title: 'Histórico' },
+  { path: 'library', component: Library, title: 'Biblioteca' },
   { path: 'about-us', component: AboutUs, title: 'Sobre Nós' },
   { path: 'cart', component: CartView, title: 'Carrinho' },
   {

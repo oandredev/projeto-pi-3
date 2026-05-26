@@ -9,7 +9,7 @@ import { CartView } from './pages/cart/cart';
 import { PaymentQRCode } from './pages/payment-qrcode/payment-qrcode';
 import { PurchaseConfirmation } from './pages/purchase-confirmation/purchase-confirmation';
 import { Library } from './pages/library/library';
-import { Developers } from './pages/developers/developers/developers';
+import { Developers } from './pages/developers/developers';
 
 export const routes: Routes = [
   { path: '', component: Offers, title: 'Ofertas' },

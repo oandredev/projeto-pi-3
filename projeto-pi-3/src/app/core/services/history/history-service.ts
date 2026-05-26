@@ -33,11 +33,11 @@ export class HistoryService {
     return throwError(() => new Error('Erro ao salvar histórico. Tente novamente.'));
   }
 
+  // Filtro usando o campo 'cart.idUser' para buscar no histórico
+  // Exemplo de URL: http://localhost:3000/history?cart.idUser=eef8
   getHistoryByUser(): Observable<History[]> {
     const urlWithFilter = `${this.historyAPI}?cart.idUser=${this.loggedUserId}`;
 
-    // Filtro usando o campo 'cart.idUser' para buscar no histórico
-    // Exemplo de URL: http://localhost:3000/history?cart.idUser=eef8
     return this.http.get<History[]>(urlWithFilter).pipe(catchError(this.handleError));
   }
 }

@@ -117,7 +117,9 @@
 }
 
 .carousel-container {
-  background-color: #121212;
+  background:
+    radial-gradient(circle at top left, rgba(123, 44, 191, 0.16), transparent 35%),
+    linear-gradient(to bottom, #111827, #0f172a);
   width: min(100%, 1200px);
   margin: 0 auto 2rem auto;
   padding: 1.5rem;
@@ -194,14 +196,15 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .offer-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
+  background:
+    radial-gradient(circle at top left, rgba(123, 44, 191, 0.35), transparent 45%),
+    linear-gradient(to bottom, #111827, #1f0f2a);
 }
 
 .image-container {
@@ -287,7 +290,9 @@
   margin: 40px auto;
   padding: 1.5rem;
   box-sizing: border-box;
-  background: #121212;
+  background:
+    radial-gradient(circle at top left, rgba(123, 44, 191, 0.35), transparent 45%),
+    linear-gradient(to bottom, #111827, #1f0f2a);
   border-radius: 12px;
 }
 
@@ -354,6 +359,9 @@
   background: #1e1e1e;
   transform: translateY(-3px);
   filter: brightness(1.15);
+  background:
+    radial-gradient(circle at top left, rgba(123, 44, 191, 0.35), transparent 45%),
+    linear-gradient(to bottom, #111827, #1f0f2a);
 }
 
 .featured-item img {

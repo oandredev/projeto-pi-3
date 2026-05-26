@@ -1,13 +1,7 @@
 {
   "loggedUser": {
     "id": 1,
-    "user": {
-      "id": "d8da",
-      "name": "COOPERATIVA DE ECONOMIA E CREDITO MUTUO DOS SERVIDORES DA FEDERACAO DO COMERCIO, SESC E SENAC DE SAO PAULO",
-      "email": "senac@senac.sp.gov.br",
-      "password": "Abcd1234#",
-      "cpf": "62928320000163"
-    }
+    "user": null
   },
   "users": [
     {
@@ -323,6 +317,36 @@
         "address": "",
         "paymentMethod": "pix",
         "date": "25/05/2026, 20:37"
+      },
+      "status": "Finalizado"
+    },
+    {
+      "id": "9119",
+      "idUser": "d8da",
+      "cart": {
+        "id": "3711",
+        "idUser": "d8da",
+        "items": [
+          {
+            "id": "a462943e-77f7-4230-bd2b-5dc433f9ae06",
+            "idUser": "d8da",
+            "offer": {
+              "id": "5",
+              "name": "Skyline Strike",
+              "priceBase": 39.9,
+              "imageUrl": "images/skyLine.png",
+              "description": "Combates frenéticos nos telhados de uma metrópole futurista. Reflexos rápidos e estratégia são sua única chance de sobrevivência.",
+              "developer": "UrbanEdge Games",
+              "publisher": "UrbanEdge Games"
+            },
+            "quantity": "1",
+            "subtotal": "39.90"
+          }
+        ],
+        "valueTotal": "39.90",
+        "address": "",
+        "paymentMethod": "debito",
+        "date": "25/05/2026, 21:56"
       },
       "status": "Finalizado"
     }

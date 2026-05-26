@@ -6,8 +6,8 @@
   grid-template-columns: minmax(0, 1.3fr) minmax(350px, 1fr);
   gap: 2rem;
   background:
-    radial-gradient(circle at top left, rgba(102, 192, 244, 0.16), transparent 35%),
-    linear-gradient(to bottom, #111827, #0f172a);
+    radial-gradient(circle at top left, rgba(123, 44, 191, 0.25), transparent 45%),
+    linear-gradient(to bottom, #111827, #140f2a);
   border: 1px solid rgba(102, 192, 244, 0.18);
   border-radius: 24px;
   box-shadow: 0 0 35px rgba(0, 0, 0, 0.55);

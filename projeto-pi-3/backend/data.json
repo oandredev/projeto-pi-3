@@ -30,6 +30,15 @@
     },
     {
       "id": "2",
+      "name": "Street Strike",
+      "priceBase": 120,
+      "imageUrl": "images/streetCar.png",
+      "description": "Corridas ilegais nas ruas da cidade com adrenalina total. Customize seu carro e domine cada pista antes do amanhecer.",
+      "developer": "NitroLab Studios",
+      "publisher": "Asphalt Publishing"
+    },
+    {
+      "id": "3",
       "name": "Apocalypse",
       "priceBase": 79.99,
       "imageUrl": "images/zombie.png",
@@ -38,7 +47,7 @@
       "publisher": "DarkForge Interactive"
     },
     {
-      "id": "3",
+      "id": "4",
       "name": "Jungle Ascendant",
       "priceBase": 89.99,
       "imageUrl": "images/primata.png",
@@ -47,7 +56,7 @@
       "publisher": "NaturePlay Publishing"
     },
     {
-      "id": "4",
+      "id": "5",
       "name": "Skyline Strike",
       "priceBase": 39.9,
       "imageUrl": "images/skyLine.png",
@@ -56,22 +65,13 @@
       "publisher": "UrbanEdge Games"
     },
     {
-      "id": "5",
+      "id": "6",
       "name": "Prehistoric",
       "priceBase": 149.9,
       "imageUrl": "images/dino.png",
       "description": "Retorne a uma era esquecida e enfrente dinossauros colossal em ambientes abertos e perigosos. A extinção está em suas mãos.",
       "developer": "AncientWorld Dev",
       "publisher": "Epoch Entertainment"
-    },
-    {
-      "id": "6",
-      "name": "Street Strike",
-      "priceBase": 120,
-      "imageUrl": "images/streetCar.png",
-      "description": "Corridas ilegais nas ruas da cidade com adrenalina total. Customize seu carro e domine cada pista antes do amanhecer.",
-      "developer": "NitroLab Studios",
-      "publisher": "Asphalt Publishing"
     },
     {
       "id": "7",
@@ -93,6 +93,15 @@
     },
     {
       "id": "9",
+      "name": "Grand GP: Nitro",
+      "priceBase": 29.99,
+      "imageUrl": "images/grandGP.png",
+      "description": "A experiência definitiva da MotoGP com física realista, estratégias de pit stop e campeonatos globais emocionantes.",
+      "developer": "PolePosition Studios",
+      "publisher": "Grand Prix Media"
+    },
+    {
+      "id": "10",
       "name": "Pilot: Fire & Rescue",
       "priceBase": 19.99,
       "imageUrl": "images/pilot.png",
@@ -101,22 +110,13 @@
       "publisher": "RescuePlay Inc"
     },
     {
-      "id": "10",
+      "id": "11",
       "name": "Strike Protocol",
       "priceBase": 95,
       "imageUrl": "images/aviation2.png",
       "description": "Operações táticas de elite em zonas de conflito ao redor do mundo. Planejamento preciso e execução perfeita são a missão.",
       "developer": "TacForce Digital",
       "publisher": "Warfront Publishing"
-    },
-    {
-      "id": "11",
-      "name": "Grand GP: Nitro",
-      "priceBase": 29.99,
-      "imageUrl": "images/grandGP.png",
-      "description": "A experiência definitiva da MotoGP com física realista, estratégias de pit stop e campeonatos globais emocionantes.",
-      "developer": "PolePosition Studios",
-      "publisher": "Grand Prix Media"
     }
   ],
   "cart": [

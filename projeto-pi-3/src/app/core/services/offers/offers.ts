@@ -19,4 +19,8 @@ export class OffersService {
       }),
     );
   }
+
+  getAllOffers() {
+    return this.http.get<Offer[]>(this.offerAPI);
+  }
 }

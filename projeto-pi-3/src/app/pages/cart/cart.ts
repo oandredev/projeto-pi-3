@@ -56,7 +56,12 @@ export class CartView {
     }
 
     this.cart.items = this.cart.items.filter((i) => i !== item);
-    this.cartService.removeCartItem(item.id!).subscribe();
+    this.cartService.removeCartItem(item.id!).subscribe({
+      next: (updatedCart) => {
+        this.cart = updatedCart;
+      },
+      error: (err) => console.error('Erro ao remover item do carrinho:', err),
+    });
   }
 
   getSubtotal(item: CartItem): number {

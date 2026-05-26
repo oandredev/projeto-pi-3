@@ -10,11 +10,7 @@ body {
   background:
     radial-gradient(circle at top, rgba(123, 44, 191, 0.25), transparent 35%),
     radial-gradient(circle at bottom right, rgba(102, 192, 244, 0.12), transparent 30%),
-    linear-gradient(
-      to bottom,
-      /*aqui eu coloco o fundo para todas as páginas. Mudei para umtom mais roxo*/ #050816,
-      #0b0117
-    );
+    linear-gradient(to bottom, #050816, #0b0117);
 
   margin: 0;
   padding: 0;

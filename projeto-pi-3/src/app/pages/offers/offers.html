@@ -1,27 +1,44 @@
 <section id="offers">
-  <div class="hero-banner">
+  <div
+    class="hero-banner"
+    [style.backgroundImage]="'url(' + offers[heroSlide]?.imageUrl + ')'"
+    (mouseenter)="stopHeroAutoPlay()"
+    (mouseleave)="startHeroAutoPlay()"
+  >
     <div class="hero-overlay">
       <div class="hero-content">
-        <span class="badge-tag">Mundial e Inédito</span>
-        <h1 class="hero-title">CYBER CHRONICLES 2026</h1>
-        <p class="hero-description">
-          Entre no submundo tecnológico neste novo RPG de ação futurista dos mesmos criadores de
-          grandes sucessos do gênero. Garanta o seu na pré-venda exclusiva aqui na A&F Games.
-        </p>
+        <span class="badge-tag">Destaque</span>
+        <h1 class="hero-title">{{ offers[heroSlide]?.name }}</h1>
+        <p class="hero-description">{{ offers[heroSlide]?.description }}</p>
         <div class="hero-actions">
-          <button class="btn-primary-tech">Reserve Agora</button>
-          <button class="btn-secondary-tech"><span class="plus-icon">+</span> Wishlist</button>
+          <button class="btn-primary-tech" (click)="goToDetails(offers[heroSlide]?.id)">
+            Ver Detalhes
+          </button>
         </div>
+      </div>
+
+      <button class="carousel-btn prev" (click)="prevHeroSlide()">❮</button>
+      <button class="carousel-btn next" (click)="nextHeroSlide()">❯</button>
+
+      <div class="carousel-dots">
+        <span
+          *ngFor="let offer of offers.slice(0, 3); let i = index"
+          class="dot"
+          [class.active]="i === heroSlide"
+          (click)="goToHeroSlide(i)"
+        >
+        </span>
       </div>
     </div>
   </div>
 
+  <!-- CARROSSEL DE CARDS -->
   <div class="carousel-container">
     <div class="carousel-header">
       <h2>Descubra algo novo <span class="arrow-title">&gt;</span></h2>
       <div class="carousel-nav-buttons">
-        <button (click)="scrollLeft()" class="nav-btn">‹</button>
-        <button (click)="scrollRight()" class="nav-btn">›</button>
+        <button (click)="scrollLeft()" class="nav-btn">❮</button>
+        <button (click)="scrollRight()" class="nav-btn">❯</button>
       </div>
     </div>
 
@@ -33,21 +50,54 @@
         <div class="card-content">
           <span class="game-type">Jogo base</span>
           <h3>{{ offer.name }}</h3>
-          <p class="price">R$ {{ offer.price | number: '1.2-2' }}</p>
+          <p class="price">R$ {{ offer.priceBase | number: '1.2-2' }}</p>
           <button class="details-button">Ver Detalhes</button>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- FEATURED CARROSSEL (8 jogos) -->
   <div class="featured-wrapper">
     <div class="featured-header">
       <h2>Destaques do mês na A&F Games <span class="arrow-title">&gt;</span></h2>
     </div>
 
     <div class="featured-content">
-      <div class="featured-banner">
-        <img src="images/destaquesMaio.png" alt="Banner" />
+      <div
+        class="featured-banner"
+        (mouseenter)="stopFeaturedAutoPlay()"
+        (mouseleave)="startFeaturedAutoPlay()"
+      >
+        <div class="carousel">
+          <div class="carousel-track-inner">
+            <div
+              *ngFor="let offer of offers.slice(0, 8); let i = index"
+              class="carousel-slide"
+              [class.active]="i === featuredSlide"
+              (click)="goToDetails(offer.id)"
+            >
+              <img [src]="offer.imageUrl" [alt]="offer.name" />
+              <div class="carousel-info">
+                <span class="carousel-name">{{ offer.name }}</span>
+                <span class="carousel-price">R$ {{ offer.priceBase | number: '1.2-2' }}</span>
+              </div>
+            </div>
+          </div>
+
+          <button class="carousel-btn prev" (click)="prevFeaturedSlide()">❮</button>
+          <button class="carousel-btn next" (click)="nextFeaturedSlide()">❯</button>
+
+          <div class="carousel-dots">
+            <span
+              *ngFor="let offer of offers.slice(0, 8); let i = index"
+              class="dot"
+              [class.active]="i === featuredSlide"
+              (click)="goToFeaturedSlide(i)"
+            >
+            </span>
+          </div>
+        </div>
       </div>
 
       <div class="featured-grid">
@@ -59,7 +109,7 @@
           <img [src]="offer.imageUrl" alt="Game" />
           <div class="item-info">
             <span>{{ offer.name }}</span>
-            <small>R$ {{ offer.price | number: '1.2-2' }}</small>
+            <small>R$ {{ offer.priceBase | number: '1.2-2' }}</small>
           </div>
         </div>
       </div>

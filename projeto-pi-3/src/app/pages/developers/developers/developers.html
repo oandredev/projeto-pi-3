@@ -1,0 +1,24 @@
+<div id="aboutPage">
+  <div class="about-area">
+    <h1>Nossa Equipe</h1>
+
+    <div class="team-grid">
+      <a
+        *ngFor="let dev of developers"
+        [href]="dev.github"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="dev-card"
+      >
+        <div class="avatar-wrapper">
+          <img [src]="dev.avatar" [alt]="dev.name" class="avatar" />
+        </div>
+        <div class="dev-info">
+          <span class="dev-name">{{ dev.name }}</span>
+          <span class="dev-role">{{ dev.role }}</span>
+          <span class="dev-github">@{{ dev.username }}</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

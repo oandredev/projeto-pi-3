@@ -128,6 +128,14 @@ ng serve
 
 http://localhost:4200
 
+5.1
+
+Utilize o seguinte site para gerar `CPF` e `CNPJ` para os testes:
+
+https://www.4devs.com.br/gerador_de_cpf
+
+https://www.4devs.com.br/gerador_de_cnpj
+
 ---
 
 ## 👨‍💻 Equipe

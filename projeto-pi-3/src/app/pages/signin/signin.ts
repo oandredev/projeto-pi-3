@@ -575,6 +575,7 @@ export class Signin {
 
         this.userRegister.registerUser(newUser).subscribe({
           next: () => {
+            alert('Cadastro realizado com sucesso! Faça login para continuar.');
             this.router.navigate(['/login']);
           },
           error: () => {

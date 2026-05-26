@@ -12,7 +12,7 @@ import { UserLoginService } from './core/services/userLogin/user-login';
   styleUrl: './app.css',
 })
 export class App {
-  protected readonly title = signal('projeto-angular-pizzaria');
+  protected readonly title = signal('projeto-angular-games');
 
   constructor(private loginService: UserLoginService) {}
 
